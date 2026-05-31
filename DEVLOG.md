@@ -1,5 +1,31 @@
 # Development Log
 
+## 2026-05-31 — Swap generic chat-bubble for LINE brand icon on login buttons
+
+**Issue:** All "Sign in with LINE" buttons used `MessageCircle` from lucide-react (a generic chat bubble), not the actual LINE brand mark.
+
+**Change:**
+- Added `components/shared/LineIcon.tsx` — inline SVG component using `fill="currentColor"` so it inherits the parent's text color (matches the lucide-react pattern). Path data lifted from `public/image/icons/line.svg`. `aria-hidden` since the button text already labels the action.
+- Replaced `<MessageCircle />` with `<LineIcon />` in the three login CTAs:
+  - `LandingNav.tsx` — top-right Sign In button
+  - `HeroSection.tsx` — primary green CTA
+  - `CtaSection.tsx` — bottom green CTA
+- Left `MessageCircle` in `FeaturesSection.tsx` (those instances are a chat-message *preview*, not a login affordance).
+
+**Notes:**
+- The source SVG hardcoded `fill="#00C300"`. Using `currentColor` instead keeps the icon white on green buttons (consistent with the design system's `--text-on-green: #FFFFFF`).
+- Not using `next/image` for this — inline SVG keeps it a single React node with no extra network request, and lets `text-*` Tailwind utilities tint it.
+
+**Files touched:**
+- `components/shared/LineIcon.tsx` (new)
+- `components/landing/LandingNav.tsx`
+- `components/landing/HeroSection.tsx`
+- `components/landing/CtaSection.tsx`
+
+**Verification:** `npx tsc --noEmit` clean.
+
+---
+
 ## 2026-05-31 — Landing page horizontal spacing refactor
 
 **Issue:** Content on landing page felt too close to viewport edges at wide viewports — not enough side whitespace.

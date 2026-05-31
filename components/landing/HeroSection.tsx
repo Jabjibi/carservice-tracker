@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { MessageCircle, Play, Car, Bell } from 'lucide-react'
+import { Play, Car, Bell } from 'lucide-react'
 import { getTranslations, getLocale } from 'next-intl/server'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { LandingContainer } from '@/components/shared/LandingContainer'
+import { LineIcon } from '@/components/shared/LineIcon'
 
 async function CarCardMockup() {
   const t = await getTranslations('hero.card')
@@ -135,7 +136,7 @@ export async function HeroSection() {
               className="h-12 gap-2 rounded-xl bg-green px-6 text-sm font-semibold text-white hover:bg-green-hover"
             >
               <Link href={`/${locale}/login`}>
-                <MessageCircle className="size-4" />
+                <LineIcon className="size-4" />
                 {t('ctaPrimary')}
               </Link>
             </Button>

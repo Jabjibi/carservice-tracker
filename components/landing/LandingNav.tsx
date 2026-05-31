@@ -1,10 +1,11 @@
 import Link from 'next/link'
-import { MessageCircle, Wrench } from 'lucide-react'
+import { Wrench } from 'lucide-react'
 import { getTranslations, getLocale } from 'next-intl/server'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { LanguageSwitcher } from '@/components/shared/LanguageSwitcher'
 import { LandingContainer } from '@/components/shared/LandingContainer'
+import { LineIcon } from '@/components/shared/LineIcon'
 
 export async function LandingNav() {
   const t = await getTranslations('nav')
@@ -51,7 +52,7 @@ export async function LandingNav() {
             size="sm"
           >
             <Link href="/login">
-              <MessageCircle className="size-4" />
+              <LineIcon className="size-4" />
               {t('login')}
             </Link>
           </Button>

@@ -46,7 +46,7 @@
     "title1": "ข้อมูลเชิงลึก",
     "title2": "ค่าใช้จ่ายของคุณ",
     "subtitle": "วิเคราะห์ทุกรายจ่ายที่คุณมี ทั้งการซ่อมบำรุง น้ำมัน และค่าประกันภัย",
-    "chartTitle": "ภาพรวมปี 2024",
+    "chartTitle": "ภาพรวมปี 2026",
     "chartPeriod": "ปีนี้",
     "expense1Label": "ซ่อมบำรุง",
     "expense1Percent": "45% ของทั้งหมด",
@@ -61,7 +61,7 @@
     "button": "เข้าสู่ระบบด้วย LINE"
   },
   "footer": {
-    "copyright": "© 2024 Car Service Tracker. All rights reserved.",
+    "copyright": "© 2026 Car Service Tracker. All rights reserved.",
     "privacy": "นโยบายความเป็นส่วนตัว",
     "terms": "เงื่อนไขการให้บริการ",
     "contact": "ติดต่อเรา"

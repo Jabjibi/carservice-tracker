@@ -1,7 +1,7 @@
-import { MessageCircle } from 'lucide-react'
 import { getTranslations, getLocale } from 'next-intl/server'
 import { Button } from '@/components/ui/button'
 import { LandingContainer } from '@/components/shared/LandingContainer'
+import { LineIcon } from '@/components/shared/LineIcon'
 
 export async function CtaSection() {
   const t = await getTranslations('cta')
@@ -20,7 +20,7 @@ export async function CtaSection() {
           size="lg"
         >
           <a href={`/${locale}/login`}>
-            <MessageCircle className="size-5" />
+            <LineIcon className="size-5" />
             {t('button')}
           </a>
         </Button>
