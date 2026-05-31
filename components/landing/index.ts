@@ -1,0 +1,6 @@
+export { LandingNav } from './LandingNav'
+export { HeroSection } from './HeroSection'
+export { FeaturesSection } from './FeaturesSection'
+export { DataSection } from './DataSection'
+export { CtaSection } from './CtaSection'
+export { LandingFooter } from './LandingFooter'
