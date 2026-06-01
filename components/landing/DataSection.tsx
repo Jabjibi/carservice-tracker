@@ -67,17 +67,19 @@ export async function DataSection() {
   ]
 
   return (
-    <section id="data" className="bg-white py-14">
+    <section id="data" className="bg-white py-12 md:py-14">
       <LandingContainer className="flex flex-col gap-10 md:flex-row md:items-center md:gap-12">
         {/* Left */}
         <div className="flex flex-1 flex-col gap-5">
           <div>
-            <h2 className="text-[34px] font-semibold leading-tight tracking-tight text-[#1D1D1F]">
+            <h2 className="text-balance text-[26px] font-semibold leading-tight tracking-tight text-[#1D1D1F] sm:text-[30px] md:text-[34px]">
               {t('title1')}
               <br />
               {t('title2')}
             </h2>
-            <p className="mt-2 text-[15px] leading-relaxed text-zinc-500">{t('subtitle')}</p>
+            <p className="mt-2 text-pretty text-sm leading-relaxed text-zinc-500 md:text-[15px]">
+              {t('subtitle')}
+            </p>
           </div>
 
           <div className="space-y-2">

@@ -66,11 +66,13 @@ export async function FeaturesSection() {
   const t = await getTranslations('features')
 
   return (
-    <section id="features" className="bg-dark-void py-14">
+    <section id="features" className="bg-dark-void py-12 md:py-14">
       <LandingContainer>
         <div className="mb-8 text-center">
-          <h2 className="text-[34px] font-semibold tracking-tight text-white">{t('title')}</h2>
-          <p className="mt-2 text-[15px] text-white/50">{t('subtitle')}</p>
+          <h2 className="text-balance text-[26px] font-semibold tracking-tight text-white sm:text-[30px] md:text-[34px]">
+            {t('title')}
+          </h2>
+          <p className="mt-2 text-pretty text-sm text-white/50 md:text-[15px]">{t('subtitle')}</p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">

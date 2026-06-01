@@ -109,7 +109,7 @@ export async function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden bg-white py-12"
+      className="relative overflow-hidden bg-white py-10 md:py-16"
       style={{
         background:
           'radial-gradient(ellipse 60% 80% at 0% 50%, rgba(6,199,85,0.10) 0%, transparent 70%), #ffffff',
@@ -119,15 +119,17 @@ export async function HeroSection() {
         {/* Left — Copy */}
         <div className="flex w-full flex-col gap-5 md:max-w-[480px] md:shrink-0">
           <h1
-            className="font-bold leading-[1.05] tracking-tight text-[#1D1D1F]"
-            style={{ fontSize: 'clamp(44px, 3.8vw, 56px)' }}
+            className="font-bold leading-[1.05] tracking-tight text-balance text-[#1D1D1F]"
+            style={{ fontSize: 'clamp(32px, 5vw, 56px)' }}
           >
-            <span className="md:whitespace-nowrap">{t('headline1')}</span>
+            <span>{t('headline1')}</span>
             <br />
             <span className="text-green">{t('headline2')}</span>
           </h1>
 
-          <p className="text-[17px] leading-relaxed text-pretty text-zinc-500">{t('subtitle')}</p>
+          <p className="text-pretty text-[15px] leading-relaxed text-zinc-500 md:text-[17px]">
+            {t('subtitle')}
+          </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-3">

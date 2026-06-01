@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Wrench } from 'lucide-react'
+import Image from 'next/image'
 import { getTranslations, getLocale } from 'next-intl/server'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -20,13 +20,17 @@ export async function LandingNav() {
   return (
     <header className="sticky top-0 z-50 border-b border-dark-border bg-dark-void">
       <nav>
-        <LandingContainer className="flex h-14 items-center justify-between">
+        <LandingContainer className="flex h-16 items-center justify-between md:h-20">
         {/* Logo */}
-        <Link href={`/${locale}`} className="flex items-center gap-2">
-          <span className="flex size-7 items-center justify-center rounded-full bg-dark-card">
-            <Wrench className="size-3.5 text-white" />
-          </span>
-          <span className="text-sm font-semibold tracking-tight text-white">ServiceTracker</span>
+        <Link href={`/${locale}`} className="flex items-center" aria-label="AutoTracker">
+          <Image
+            src="/image/logo.png"
+            alt="AutoTracker"
+            width={120}
+            height={80}
+            priority
+            className="h-10 w-auto md:h-14"
+          />
         </Link>
 
         {/* Nav links */}

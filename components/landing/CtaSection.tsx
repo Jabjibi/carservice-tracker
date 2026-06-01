@@ -8,15 +8,17 @@ export async function CtaSection() {
   const locale = await getLocale()
 
   return (
-    <section className="bg-dark-void py-14">
+    <section className="bg-dark-void py-12 md:py-14">
       <LandingContainer className="max-w-4xl text-center">
-        <h2 className="whitespace-nowrap text-[32px] font-semibold leading-tight tracking-tight text-white">
+        <h2 className="text-balance text-[24px] font-semibold leading-tight tracking-tight text-white sm:text-[28px] md:text-[32px]">
           {t('title')}
         </h2>
-        <p className="mt-4 text-[17px] leading-relaxed text-white/50">{t('subtitle')}</p>
+        <p className="mt-4 text-pretty text-[15px] leading-relaxed text-white/50 md:text-[17px]">
+          {t('subtitle')}
+        </p>
         <Button
           asChild
-          className="mt-8 gap-2 rounded-full bg-green px-8 py-3 text-base font-semibold text-white hover:bg-green-hover"
+          className="mt-8 gap-2 rounded-full bg-green px-6 py-3 text-sm font-semibold text-white hover:bg-green-hover md:px-8 md:text-base"
           size="lg"
         >
           <a href={`/${locale}/login`}>

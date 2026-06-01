@@ -1,5 +1,58 @@
 # Development Log
 
+## 2026-06-01 — Landing page responsive pass across all breakpoints
+
+**Issues found during audit:**
+- `LandingNav`: logo at `h-20` (80px) was taller than navbar at `h-14` (56px) → overflow.
+- `HeroSection`: `md:whitespace-nowrap` on the first headline span caused overflow at narrow desktop widths (~1024–1200px). Headline `clamp(44px, 3.8vw, 56px)` had a 44px floor — too large for ~360px mobiles.
+- `FeaturesSection`, `DataSection`, `CtaSection`: fixed `text-[34px]` / `text-[32px]` titles too large on mobile.
+- `CtaSection`: `whitespace-nowrap` on h2 guaranteed overflow on mobile.
+
+**Changes:**
+- `LandingNav.tsx`: navbar `h-14` → `h-16 md:h-20`; logo `h-20` → `h-10 md:h-14`.
+- `HeroSection.tsx`: removed `md:whitespace-nowrap`; headline clamp `44px–56px` → `32px–56px` (5vw scaling); added `text-balance`; subtitle `text-[17px]` → `text-[15px] md:text-[17px]`; section padding `py-12` → `py-10 md:py-16`.
+- `FeaturesSection.tsx`: title `text-[34px]` → responsive `text-[26px] sm:text-[30px] md:text-[34px]`; section `py-14` → `py-12 md:py-14`; added `text-balance` / `text-pretty`.
+- `DataSection.tsx`: same title scaling + balance/pretty as Features.
+- `CtaSection.tsx`: removed `whitespace-nowrap`; title responsive `text-[24px] sm:text-[28px] md:text-[32px]`; button padding/size step down on mobile (`px-6 py-3 text-sm` → `md:px-8 md:text-base`).
+
+**Patterns applied:**
+- Mobile-first sizing with `sm:` / `md:` step-ups instead of fixed pixel values.
+- `text-balance` on headings, `text-pretty` on body copy — improves wrapping at all widths.
+- Smaller section vertical padding on mobile to keep above-the-fold density.
+
+**Not changed (intentional):**
+- Did not add a mobile hamburger menu — nav links remain hidden below `md` per the existing design. Logo + language switcher + Sign-In CTA still fit on a 320px viewport.
+- `LandingFooter` already wraps correctly.
+
+**Files touched:**
+- `components/landing/LandingNav.tsx`
+- `components/landing/HeroSection.tsx`
+- `components/landing/FeaturesSection.tsx`
+- `components/landing/DataSection.tsx`
+- `components/landing/CtaSection.tsx`
+
+**Verification:** `npx tsc --noEmit` clean.
+
+---
+
+## 2026-06-01 — Replace navbar brand mark with logo image
+
+**Change:**
+- `LandingNav.tsx`: replaced the inline `<Wrench>` icon + "ServiceTracker" text with `next/image` rendering `/public/image/logo.png` (1536×1024, contains the AUTO TRACKER lockup + car silhouette).
+- Sized at `h-9 w-auto` (36px tall, ~54px wide based on 3:2 ratio) — fits inside the `h-14` navbar with breathing room.
+- `priority` flag set since the logo is above the fold on the landing page.
+- `aria-label="AutoTracker"` on the parent `<Link>` since the image is purely decorative inside a navigable element.
+- Dropped the lucide `Wrench` import (no longer used in this file).
+
+**Files touched:**
+- `components/landing/LandingNav.tsx`
+
+**Note:** `LandingFooter.tsx` still uses the `Wrench` icon for the copyright row — left unchanged since the user only asked for the navbar.
+
+**Verification:** `npx tsc --noEmit` clean.
+
+---
+
 ## 2026-05-31 — Swap generic chat-bubble for LINE brand icon on login buttons
 
 **Issue:** All "Sign in with LINE" buttons used `MessageCircle` from lucide-react (a generic chat bubble), not the actual LINE brand mark.
