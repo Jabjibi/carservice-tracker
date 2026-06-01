@@ -29,7 +29,7 @@ export async function LandingNav() {
             width={120}
             height={80}
             priority
-            className="h-10 w-auto md:h-14"
+            className="h-20 w-auto md:h-24"
           />
         </Link>
 
