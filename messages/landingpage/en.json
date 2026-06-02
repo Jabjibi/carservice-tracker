@@ -60,6 +60,16 @@
     "subtitle": "Start for free today. Manage unlimited vehicles and get LINE notifications throughout your trial.",
     "button": "Sign in with LINE"
   },
+  "login": {
+    "tagline": "Car Service Tracker",
+    "subtitle": "Connect your LINE account to get started",
+    "cta": "Sign in with LINE",
+    "termsPrefix": "By signing in, you agree to our",
+    "termsLink": "Terms of Service",
+    "and": "and",
+    "privacyLink": "Privacy Policy",
+    "backToHome": "Back to home"
+  },
   "footer": {
     "copyright": "© 2026 Car Service Tracker. All rights reserved.",
     "privacy": "Privacy Policy",
