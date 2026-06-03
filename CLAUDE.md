@@ -60,16 +60,20 @@ components/
 │   └── ...
 └── ui/              # shadcn/ui components (do not modify)
 
-hooks/
-├── use-cars.ts      # Car list state
-├── use-car.ts       # Single car state
-├── use-service.ts   # Service form state
-└── ...              # All useState / useMemo logic lives here
+lib/
+├── types.ts         # Shared TypeScript types
+├── utils.ts         # Pure utility functions
+└── hooks/
+    ├── use-cars.ts      # Car list state
+    ├── use-car.ts       # Single car state
+    ├── use-service.ts   # Service form state
+    └── ...              # All useState / useMemo logic lives here
 ```
 
 ### Logic Separation
 
-- **hooks/**: all `useState`, `useMemo`, `useCallback`, `useReducer` logic
+- **lib/hooks/**: all React hook logic (`useState`, `useMemo`, `useCallback`, `useReducer`)
+- **lib/**: pure utilities — `types.ts`, `utils.ts`, non-React helpers
 - **components/shared/**: custom UI components used across pages
 - **components/ui/**: shadcn/ui primitives (do not edit)
 - Pages are thin — they import hooks + shared components only
