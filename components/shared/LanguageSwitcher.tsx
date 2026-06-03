@@ -1,21 +1,21 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
-import { routing } from '@/i18n/routing'
+import { useRouter } from 'next/navigation'
+import { setLocale } from '@/lib/actions/locale'
+
+const LOCALES = ['th', 'en'] as const
 
 export function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
-  const pathname = usePathname()
   const router = useRouter()
 
-  function switchLocale(newLocale: string) {
-    const segments = pathname.split('/')
-    segments[1] = newLocale
-    router.push(segments.join('/') || '/')
+  async function switchLocale(newLocale: string) {
+    await setLocale(newLocale)
+    router.refresh()
   }
 
   return (
     <div className="border-dark-border flex items-center gap-0.5 rounded-full border px-1.5 py-1">
-      {routing.locales.map((locale) => (
+      {LOCALES.map((locale) => (
         <button
           key={locale}
           onClick={() => switchLocale(locale)}

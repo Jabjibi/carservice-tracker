@@ -13,9 +13,18 @@ type CarThumbnailProps = {
   type: CarType
   alt?: string
   className?: string
+  bare?: boolean
 }
 
-export function CarThumbnail({ type, alt = '', className }: CarThumbnailProps) {
+export function CarThumbnail({ type, alt = '', className, bare = false }: CarThumbnailProps) {
+  if (bare) {
+    return (
+      <div className={cn('relative', className)}>
+        <Image src={SRC[type]} alt={alt} fill sizes="128px" className="object-contain" />
+      </div>
+    )
+  }
+
   return (
     <div
       className={cn(

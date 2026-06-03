@@ -1,5 +1,23 @@
-import { redirect } from 'next/navigation'
+import {
+  LandingNav,
+  HeroSection,
+  FeaturesSection,
+  DataSection,
+  CtaSection,
+  LandingFooter,
+} from '@/components/landing'
 
-export default function RootPage() {
-  redirect('/th')
+export default function LandingPage() {
+  return (
+    <>
+      <LandingNav />
+      <main>
+        <HeroSection />
+        <FeaturesSection />
+        <DataSection />
+        <CtaSection />
+      </main>
+      <LandingFooter />
+    </>
+  )
 }

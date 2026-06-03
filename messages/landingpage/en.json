@@ -81,6 +81,108 @@
     "cars": "My Cars",
     "notifications": "Notifications"
   },
+  "cars": {
+    "title": "My Cars",
+    "subtitle": "{count} vehicles registered",
+    "subtitleEmpty": "No vehicles yet",
+    "empty": {
+      "title": "No cars yet",
+      "subtitle": "Add your first car to start tracking"
+    },
+    "fab": {
+      "trigger": "Add",
+      "addCar": "Add new car",
+      "logService": "Log service"
+    }
+  },
+  "addCar": {
+    "title": "Add New Car",
+    "back": "My Cars",
+    "typeLabel": "Vehicle type",
+    "types": {
+      "sedan": "Sedan",
+      "pickup": "Pickup",
+      "van": "Van",
+      "motorcycle": "Motorcycle"
+    },
+    "brand": "Brand",
+    "brandPlaceholder": "e.g. Honda, Toyota",
+    "model": "Model",
+    "modelPlaceholder": "e.g. Civic, Camry",
+    "year": "Year",
+    "yearPlaceholder": "e.g. 2021",
+    "plate": "License plate",
+    "platePlaceholder": "e.g. ABC-1234",
+    "color": "Color (optional)",
+    "colorPlaceholder": "e.g. White, Black",
+    "mileage": "Current mileage (optional)",
+    "mileagePlaceholder": "e.g. 48500",
+    "submit": "Save car"
+  },
+  "logService": {
+    "title": "Log Service",
+    "back": "Back",
+    "typeLabel": "Service type",
+    "types": {
+      "oil": "Engine oil",
+      "tire": "Tires",
+      "filter": "Air filter",
+      "brake": "Brakes",
+      "electrical": "Electrical",
+      "inspection": "Inspection",
+      "other": "Other"
+    },
+    "date": "Date",
+    "mileage": "Mileage at service",
+    "mileagePlaceholder": "e.g. 48500",
+    "cost": "Cost (฿)",
+    "costPlaceholder": "e.g. 850",
+    "shop": "Shop / Garage (optional)",
+    "shopPlaceholder": "e.g. Honda Service Center",
+    "notes": "Notes (optional)",
+    "notesPlaceholder": "Additional details",
+    "submit": "Save service"
+  },
+  "carDetail": {
+    "back": "My Cars",
+    "mileage": "km",
+    "tabs": {
+      "history": "History",
+      "trips": "Trips",
+      "stats": "Stats",
+      "settings": "Settings"
+    },
+    "history": {
+      "title": "Service History",
+      "empty": "No service records yet",
+      "emptyHint": "Log your first service to start tracking",
+      "shop": "Shop"
+    },
+    "trips": {
+      "title": "Trips",
+      "totalDistance": "Total distance",
+      "tripCount": "trips",
+      "empty": "No trips yet",
+      "emptyHint": "Log a trip to start tracking mileage"
+    },
+    "stats": {
+      "title": "Statistics",
+      "totalExpense": "Total expense",
+      "avgPerService": "Avg. per service",
+      "serviceCount": "Total services",
+      "topCategories": "Top categories"
+    },
+    "settings": {
+      "editCar": "Edit car info",
+      "notifications": "Notification settings",
+      "deleteCar": "Remove car from system"
+    },
+    "fab": {
+      "trigger": "Add",
+      "logService": "Log service",
+      "logTrip": "Log trip"
+    }
+  },
   "dashboard": {
     "greetingSubtitle": "your car care overview",
     "stats": {

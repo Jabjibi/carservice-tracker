@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { Bell, Car, LayoutDashboard, PanelLeft, type LucideIcon } from 'lucide-react'
 import {
   Sidebar,
@@ -29,7 +29,7 @@ type NavItem = {
 
 const NAV_ITEMS: ReadonlyArray<NavItem> = [
   { key: 'dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { key: 'cars', href: '/cars', icon: Car },
+  { key: 'cars', href: '/mycar', icon: Car },
   { key: 'notifications', href: '/notifications', icon: Bell },
 ]
 
@@ -43,7 +43,6 @@ const GLASS_INNER = [
 
 export function AppSidebar() {
   const t = useTranslations('sidebar')
-  const locale = useLocale()
   const pathname = usePathname()
   const { toggleSidebar } = useSidebar()
 
@@ -52,7 +51,7 @@ export function AppSidebar() {
       <SidebarHeader className="px-3 pt-4 pb-2 group-data-[collapsible=icon]:px-1!">
         <div className="flex items-center justify-between group-data-[collapsible=icon]:justify-center">
           <Link
-            href={`/${locale}/dashboard`}
+            href="/dashboard"
             aria-label="Car Service Tracker"
             className="inline-flex items-center group-data-[collapsible=icon]:hidden"
           >
@@ -80,7 +79,7 @@ export function AppSidebar() {
           <SidebarGroupContent className="group-data-[collapsible=icon]:p-0!">
             <SidebarMenu className="gap-1">
               {NAV_ITEMS.map((item) => {
-                const href = `/${locale}${item.href}`
+                const href = item.href
                 const isActive = pathname === href || pathname.startsWith(`${href}/`)
                 const Icon = item.icon
                 const label = t(item.key)

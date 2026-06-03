@@ -81,6 +81,108 @@
     "cars": "รถของฉัน",
     "notifications": "การแจ้งเตือน"
   },
+  "cars": {
+    "title": "รถของฉัน",
+    "subtitle": "ลงทะเบียนแล้ว {count} คัน",
+    "subtitleEmpty": "ยังไม่มีรถที่ลงทะเบียน",
+    "empty": {
+      "title": "ยังไม่มีรถ",
+      "subtitle": "เพิ่มรถคันแรกเพื่อเริ่มติดตาม"
+    },
+    "fab": {
+      "trigger": "เพิ่ม",
+      "addCar": "เพิ่มรถใหม่",
+      "logService": "บันทึกการซ่อม"
+    }
+  },
+  "addCar": {
+    "title": "เพิ่มรถใหม่",
+    "back": "รถของฉัน",
+    "typeLabel": "ประเภทรถ",
+    "types": {
+      "sedan": "รถเก๋ง",
+      "pickup": "รถกระบะ",
+      "van": "รถตู้",
+      "motorcycle": "มอเตอร์ไซค์"
+    },
+    "brand": "ยี่ห้อ",
+    "brandPlaceholder": "เช่น Honda, Toyota",
+    "model": "รุ่น",
+    "modelPlaceholder": "เช่น Civic, Camry",
+    "year": "ปีที่ผลิต",
+    "yearPlaceholder": "เช่น 2021",
+    "plate": "ทะเบียนรถ",
+    "platePlaceholder": "เช่น กข-1234",
+    "color": "สี (ไม่บังคับ)",
+    "colorPlaceholder": "เช่น ขาว, ดำ",
+    "mileage": "เลขไมล์ปัจจุบัน (ไม่บังคับ)",
+    "mileagePlaceholder": "เช่น 48500",
+    "submit": "บันทึกรถ"
+  },
+  "logService": {
+    "title": "บันทึกการซ่อม",
+    "back": "กลับ",
+    "typeLabel": "ประเภทการซ่อม",
+    "types": {
+      "oil": "น้ำมันเครื่อง",
+      "tire": "ยาง",
+      "filter": "ไส้กรอง",
+      "brake": "เบรค",
+      "electrical": "ระบบไฟ",
+      "inspection": "ตรวจสภาพ",
+      "other": "อื่นๆ"
+    },
+    "date": "วันที่",
+    "mileage": "เลขไมล์ ณ วันที่ซ่อม",
+    "mileagePlaceholder": "เช่น 48500",
+    "cost": "ค่าใช้จ่าย (฿)",
+    "costPlaceholder": "เช่น 850",
+    "shop": "ร้าน / อู่ (ไม่บังคับ)",
+    "shopPlaceholder": "เช่น ศูนย์ Honda สาขาลาดพร้าว",
+    "notes": "หมายเหตุ (ไม่บังคับ)",
+    "notesPlaceholder": "รายละเอียดเพิ่มเติม",
+    "submit": "บันทึกการซ่อม"
+  },
+  "carDetail": {
+    "back": "รถของฉัน",
+    "mileage": "กม.",
+    "tabs": {
+      "history": "ประวัติ",
+      "trips": "ออกทริป",
+      "stats": "สถิติ",
+      "settings": "ตั้งค่า"
+    },
+    "history": {
+      "title": "ประวัติซ่อมบำรุง",
+      "empty": "ยังไม่มีประวัติการซ่อม",
+      "emptyHint": "บันทึกการซ่อมครั้งแรกเพื่อเริ่มติดตาม",
+      "shop": "ร้าน"
+    },
+    "trips": {
+      "title": "ออกทริป",
+      "totalDistance": "ระยะทางรวม",
+      "tripCount": "ทริป",
+      "empty": "ยังไม่มีทริป",
+      "emptyHint": "บันทึกทริปเพื่อติดตามระยะทาง"
+    },
+    "stats": {
+      "title": "สถิติ",
+      "totalExpense": "ค่าใช้จ่ายรวม",
+      "avgPerService": "เฉลี่ยต่อครั้ง",
+      "serviceCount": "จำนวนครั้ง",
+      "topCategories": "หมวดที่ใช้มากสุด"
+    },
+    "settings": {
+      "editCar": "แก้ไขข้อมูลรถ",
+      "notifications": "ตั้งค่าการแจ้งเตือน",
+      "deleteCar": "ลบรถออกจากระบบ"
+    },
+    "fab": {
+      "trigger": "เพิ่ม",
+      "logService": "บันทึกการซ่อม",
+      "logTrip": "บันทึกทริป"
+    }
+  },
   "dashboard": {
     "greetingSubtitle": "ภาพรวมการดูแลรถของคุณ",
     "stats": {

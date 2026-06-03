@@ -37,126 +37,163 @@ Design: strict monochrome (Apple × Tesla) — only exception is LINE green `#06
 
 ```
 app/
-├── layout.tsx               # Root layout + fonts + metadata
+├── layout.tsx               # Root layout — html/body/fonts/i18n only
 ├── page.tsx                 # Landing page (/)
 ├── login/page.tsx           # Login (/login)
-├── dashboard/page.tsx       # Dashboard (/dashboard)
-├── cars/
-│   ├── page.tsx             # My Cars (/cars)
-│   ├── new/page.tsx         # Add Car wizard (/cars/new)
-│   └── [id]/
-│       ├── page.tsx         # Car Detail (/cars/[id])
-│       └── service/
-│           └── new/page.tsx # Add Service (/cars/[id]/service/new)
-└── settings/
-    └── notifications/page.tsx  # Notification Settings
+└── (customer)/              # Route group — pages that require sidebar
+    ├── layout.tsx           # Sidebar layout (AppSidebar + SidebarInset)
+    ├── dashboard/page.tsx   # Dashboard (/dashboard)
+    ├── mycar/
+    │   ├── page.tsx         # My Cars (/mycar)
+    │   └── [id]/page.tsx    # Car Detail (/mycar/[id])
+    ├── addcar/page.tsx      # Add Car (/addcar)
+    └── repair/page.tsx      # Log Service (/repair?id=[carId])
 
 components/
-├── shared/          # Shared/global custom components
-│   ├── Sidebar.tsx
-│   ├── TopBar.tsx
+├── cars/            # All UI for cars feature (list + detail + tabs)
 │   ├── CarCard.tsx
-│   ├── StatusBadge.tsx
+│   ├── CarDetailClient.tsx
+│   ├── HistoryTab.tsx
+│   ├── TripsTab.tsx
+│   ├── StatsTab.tsx
+│   └── SettingsTab.tsx
+├── add-car/         # UI for add car form
+│   └── AddCarClient.tsx
+├── repair/          # UI for log service form
+│   └── LogServiceClient.tsx
+├── shared/          # Primitives reused across features
+│   ├── Fab.tsx
+│   ├── SectionCard.tsx
+│   ├── CarThumbnail.tsx
 │   └── ...
 └── ui/              # shadcn/ui components (do not modify)
 
 lib/
 ├── types.ts         # Shared TypeScript types
-├── utils.ts         # Pure utility functions
+├── utils.ts         # Pure utility functions (cn, baht)
+├── car-stats.ts     # Pure business logic (computeCarStats)
+├── actions/         # Server Actions
+│   └── locale.ts   # setLocale() — writes NEXT_LOCALE cookie
 └── hooks/
-    ├── use-cars.ts      # Car list state
-    ├── use-car.ts       # Single car state
-    ├── use-service.ts   # Service form state
-    └── ...              # All useState / useMemo logic lives here
+    ├── use-cars.ts
+    ├── use-car.ts
+    ├── use-service-logs.ts
+    ├── use-trips.ts
+    └── ...          # All useState / useMemo logic lives here
 ```
+
+### Page Rules — Pages are always thin
+
+**Every `page.tsx` does exactly two things: export metadata + render one component.**
+All UI lives in `components/[feature]/`. Never write JSX directly in a page file.
+
+```tsx
+// ✅ page.tsx — thin Server Component
+import type { Metadata } from 'next'
+import { MyCarClient } from '@/components/cars/MyCarClient'
+
+export const metadata: Metadata = {
+  title: 'รถของฉัน',
+  description: 'รายการรถทั้งหมดของคุณ',
+}
+
+export default function MyCarPage() {
+  return <MyCarClient />
+}
+```
+
+```tsx
+// ❌ ห้ามเขียน JSX ใน page.tsx โดยตรง
+export default function MyCarPage() {
+  return (
+    <div className="grid ...">
+      {cars.map(...)}  {/* ← logic + UI ต้องย้ายไป component */}
+    </div>
+  )
+}
+```
+
+### Component Organization Rules
+
+- **`components/[feature]/`** — UI ทั้งหมดของ feature นั้น ไม่มี `_components/` ใน `app/`
+- **`components/shared/`** — primitive ที่ใช้ข้ามหลาย feature (Fab, SectionCard, LicensePlate ฯลฯ)
+- **`components/ui/`** — shadcn/ui ห้ามแตะ
+
+### Layout Rules
+
+- **`app/layout.tsx`** — HTML shell เท่านั้น (`<html>`, `<body>`, fonts, `NextIntlClientProvider`)
+- **`app/(customer)/layout.tsx`** — Sidebar shell สำหรับหน้าที่ login แล้วเท่านั้น
+- ห้ามใส่ sidebar ใน root layout — landing และ login ต้องไม่มี sidebar
 
 ### Logic Separation
 
-- **lib/hooks/**: all React hook logic (`useState`, `useMemo`, `useCallback`, `useReducer`)
-- **lib/**: pure utilities — `types.ts`, `utils.ts`, non-React helpers
-- **components/shared/**: custom UI components used across pages
-- **components/ui/**: shadcn/ui primitives (do not edit)
-- Pages are thin — they import hooks + shared components only
+- **`lib/hooks/`** — React hook ทั้งหมด (`useState`, `useMemo`, `useCallback`, `useReducer`)
+- **`lib/`** — pure utilities และ business logic (`types.ts`, `utils.ts`, `car-stats.ts`)
+- **`lib/actions/`** — Server Actions (เขียน cookie, mutate data)
+- ห้าม logic ใน `page.tsx` หรือ component โดยตรง
+
+### i18n — Cookie-based (ไม่มี locale ใน URL หรือ folder)
+
+- ไม่มี `[locale]` ใน URL หรือ file structure เลย
+- `proxy.ts` — passthrough เท่านั้น ไม่ทำ routing
+- `i18n/request.ts` — อ่าน locale จาก `NEXT_LOCALE` cookie โดยตรง
+- สลับภาษาผ่าน `setLocale()` server action → `router.refresh()`
+
+```ts
+// i18n/request.ts
+const cookieStore = await cookies()
+const locale = cookieStore.get('NEXT_LOCALE')?.value ?? 'th'
+```
 
 ### Next.js 16 Notes
 
 - Proxy file: `proxy.ts` (not `middleware.ts`)
-- `params` and `searchParams` are `Promise` — must `await` them
-- Metadata: export `metadata` or `generateMetadata` from Server Components only
-- Fonts: use `next/font/google` only (no `<link>` tags)
+- `params` และ `searchParams` เป็น `Promise` — ต้อง `await` เสมอ
+- Metadata: export จาก Server Component เท่านั้น
+- Fonts: ใช้ `next/font/google` เท่านั้น (ห้ามใช้ `<link>` tag)
 
 ### Metadata Rules
 
 #### 1. Server Components only
 
-`metadata` / `generateMetadata` **must be exported from Server Components only**.
-
-If a page has `'use client'`, extract metadata first:
-
-- Remove `'use client'` from the page and move client logic into a child component
-- Or export metadata from the route's `layout.tsx`
-
-```tsx
-// ✅ page.tsx — Server Component
-import type { Metadata } from 'next'
-import { DashboardClient } from './_components/DashboardClient' // 'use client' lives here
-
-export const metadata: Metadata = { title: 'Dashboard', description: '...' }
-export default function Page() {
-  return <DashboardClient />
-}
-```
+`metadata` / `generateMetadata` ต้อง export จาก Server Component เท่านั้น
+ถ้า page มี `'use client'` ให้ย้าย client logic ไปอยู่ใน child component แทน
 
 #### 2. Title template
 
-Root layout already sets the template — every page only needs a short title:
+Root layout ตั้ง template ไว้แล้ว — แต่ละ page ใส่แค่ title สั้นๆ:
 
 ```tsx
-// app/[locale]/layout.tsx (root)
+// app/layout.tsx
 export const metadata: Metadata = {
   title: { default: 'Car Service Tracker', template: '%s | Car Service Tracker' },
 }
 
-// Every page — short title only, template appends the rest
+// ทุก page — ใส่แค่ title สั้นๆ template จะต่อท้ายให้เอง
 export const metadata: Metadata = {
-  title: 'Dashboard', // → "Dashboard | Car Service Tracker"
-  description: 'Overview of your vehicles and expenses',
+  title: 'รถของฉัน', // → "รถของฉัน | Car Service Tracker"
 }
 ```
 
 #### 3. Static vs Dynamic
 
-- **Static** (`export const metadata`) — use for pages where the title does not depend on data
-- **Dynamic** (`export async function generateMetadata`) — use when the title comes from route params, e.g. `/cars/[id]`
+- **Static** (`export const metadata`) — title ไม่ขึ้นกับ data
+- **Dynamic** (`export async function generateMetadata`) — title มาจาก route params
 
 ```tsx
-// Dynamic — individual car detail page
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ id: string }>
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
-  const car = await getCar(id)
-  return { title: car.name, description: `Service history for ${car.name}` }
+  const car = cars.find((c) => c.id === id)
+  return { title: `${car?.brand} ${car?.model}` }
 }
 ```
 
-#### 4. Viewport — export separately
+#### 4. Checklist — ทุก page
 
-Do not put viewport inside `metadata` — export it as a separate constant:
-
-```tsx
-import type { Viewport } from 'next'
-export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#FFFFFF' }
-```
-
-#### 5. Checklist — every page
-
-- [ ] `title` — short, descriptive (template appends brand automatically)
-- [ ] `description` — one sentence describing the page
-- [ ] Exported from a Server Component only
-- [ ] If page is `'use client'` → extract client logic into a child component first
+- [ ] `title` — สั้น อ่านรู้เรื่อง
+- [ ] `description` — หนึ่งประโยค
+- [ ] Export จาก Server Component เท่านั้น
+- [ ] ถ้า page เป็น `'use client'` → ย้าย client logic ออกไป child component ก่อน
 
 ### Design System Tokens (Tailwind custom vars)
 
@@ -244,24 +281,17 @@ Do **not** call `setState` synchronously inside `useEffect`. Initialize state wi
 ```ts
 // ❌ triggers lint error
 useEffect(() => {
-  setState(someValue)   // synchronous setState in effect body
-  ...
+  setState(someValue)
 }, [])
 
-// ✅ correct — lazy initializer runs once on mount, not inside effect
+// ✅ correct — lazy initializer
 const [value, setValue] = useState(() => someValue)
-
-useEffect(() => {
-  // effect only subscribes / cleans up
-}, [])
 ```
 
 #### When moving files — check all dependents
-
-If a file is moved (e.g. `hooks/` → `lib/hooks/`), grep for every import before moving:
 
 ```bash
 grep -rn "from '@/hooks/" app/ components/
 ```
 
-`components/ui/sidebar.tsx` imports `useIsMobile` from `@/lib/hooks/use-mobile` — update this path if hooks are ever relocated again.
+`components/ui/sidebar.tsx` imports `useIsMobile` from `@/lib/hooks/use-mobile` — update this path if hooks are ever relocated.

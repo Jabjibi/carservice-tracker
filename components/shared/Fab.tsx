@@ -60,19 +60,32 @@ function FabMenu({ children }: FabMenuProps) {
 type FabItemProps = {
   icon: React.ReactNode
   label: string
+  href?: string
   onSelect?: () => void
 }
 
-function FabItem({ icon, label, onSelect }: FabItemProps) {
+function FabItem({ icon, label, href, onSelect }: FabItemProps) {
   return (
     <DropdownMenuItem
+      asChild={!!href}
       onSelect={onSelect}
       className="cursor-pointer gap-3 rounded-[10px] px-3 py-2.5 text-[13px] font-medium text-[#1D1D1F] focus:bg-black/[0.05] focus:text-[#1D1D1F]"
     >
-      <span className="flex size-7 items-center justify-center rounded-full bg-black/[0.04] ring-1 ring-black/[0.05]">
-        {icon}
-      </span>
-      {label}
+      {href ? (
+        <a href={href} className="flex items-center gap-3">
+          <span className="flex size-7 items-center justify-center rounded-full bg-black/[0.04] ring-1 ring-black/[0.05]">
+            {icon}
+          </span>
+          {label}
+        </a>
+      ) : (
+        <>
+          <span className="flex size-7 items-center justify-center rounded-full bg-black/[0.04] ring-1 ring-black/[0.05]">
+            {icon}
+          </span>
+          {label}
+        </>
+      )}
     </DropdownMenuItem>
   )
 }

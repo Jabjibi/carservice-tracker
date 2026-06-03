@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Sarabun, JetBrains_Mono } from 'next/font/google'
 import { getLocale } from 'next-intl/server'
+import { NextIntlClientProvider } from 'next-intl'
 import './globals.css'
 
 const inter = Inter({
@@ -40,7 +41,9 @@ export default async function RootLayout({
       lang={locale}
       className={`${inter.variable} ${sarabun.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      </body>
     </html>
   )
 }
