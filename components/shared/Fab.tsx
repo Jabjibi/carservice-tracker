@@ -14,7 +14,7 @@ type FabRootProps = {
 
 function FabRoot({ children }: FabRootProps) {
   return (
-    <div className="pointer-events-none fixed bottom-6 right-6 z-50">
+    <div className="pointer-events-none fixed right-6 bottom-6 z-50">
       <div className="pointer-events-auto">
         <DropdownMenu>{children}</DropdownMenu>
       </div>

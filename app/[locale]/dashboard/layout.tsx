@@ -1,15 +1,8 @@
-import {
-  SidebarInset,
-  SidebarProvider,
-} from '@/components/ui/sidebar'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { AppSidebar } from '@/components/shared/AppSidebar'
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative min-h-svh bg-[#F5F5F7] text-[#1D1D1F]">
       {/* ambient tint — soft green wash for frosted glass to filter */}
@@ -22,9 +15,7 @@ export default function DashboardLayout({
         <SidebarProvider defaultOpen>
           <AppSidebar />
           <SidebarInset className="bg-transparent">
-            <div className="px-6 py-6 lg:px-10 lg:py-10">
-              {children}
-            </div>
+            <div className="px-6 py-6 lg:px-10 lg:py-10">{children}</div>
           </SidebarInset>
         </SidebarProvider>
       </TooltipProvider>

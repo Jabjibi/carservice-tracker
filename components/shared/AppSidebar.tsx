@@ -49,7 +49,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar variant="floating" collapsible="icon" className={GLASS_INNER}>
-      <SidebarHeader className="px-3 pb-2 pt-4 group-data-[collapsible=icon]:px-1!">
+      <SidebarHeader className="px-3 pt-4 pb-2 group-data-[collapsible=icon]:px-1!">
         <div className="flex items-center justify-between group-data-[collapsible=icon]:justify-center">
           <Link
             href={`/${locale}/dashboard`}
@@ -81,8 +81,7 @@ export function AppSidebar() {
             <SidebarMenu className="gap-1">
               {NAV_ITEMS.map((item) => {
                 const href = `/${locale}${item.href}`
-                const isActive =
-                  pathname === href || pathname.startsWith(`${href}/`)
+                const isActive = pathname === href || pathname.startsWith(`${href}/`)
                 const Icon = item.icon
                 const label = t(item.key)
                 return (
@@ -91,7 +90,7 @@ export function AppSidebar() {
                       asChild
                       isActive={isActive}
                       tooltip={label}
-                      className="h-10 rounded-[12px] px-3 text-[14px] font-medium text-[#6E6E73] transition hover:bg-black/[0.04] hover:text-[#1D1D1F] data-[active=true]:bg-black/[0.05] data-[active=true]:text-[#1D1D1F] data-[active=true]:ring-1 data-[active=true]:ring-black/[0.06] group-data-[collapsible=icon]:w-full! group-data-[collapsible=icon]:h-10! group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:justify-center!"
+                      className="h-10 rounded-[12px] px-3 text-[14px] font-medium text-[#6E6E73] transition group-data-[collapsible=icon]:h-10! group-data-[collapsible=icon]:w-full! group-data-[collapsible=icon]:justify-center! group-data-[collapsible=icon]:p-0! hover:bg-black/[0.04] hover:text-[#1D1D1F] data-[active=true]:bg-black/[0.05] data-[active=true]:text-[#1D1D1F] data-[active=true]:ring-1 data-[active=true]:ring-black/[0.06]"
                     >
                       <Link href={href}>
                         <Icon className="size-[18px] shrink-0" />

@@ -28,11 +28,7 @@ export function ExpenseBarChart({ data }: ExpenseBarChartProps) {
         data={[...data]}
         margin={{ top: 12, right: 8, left: -16, bottom: 0 }}
       >
-        <CartesianGrid
-          vertical={false}
-          stroke="rgba(0,0,0,0.06)"
-          strokeDasharray="3 3"
-        />
+        <CartesianGrid vertical={false} stroke="rgba(0,0,0,0.06)" strokeDasharray="3 3" />
         <XAxis
           dataKey="month"
           tickLine={false}
@@ -49,12 +45,7 @@ export function ExpenseBarChart({ data }: ExpenseBarChartProps) {
           cursor={{ fill: 'rgba(0,0,0,0.04)' }}
           content={<ChartTooltipContent indicator="line" />}
         />
-        <Bar
-          dataKey="value"
-          fill="var(--color-value)"
-          radius={[8, 8, 4, 4]}
-          maxBarSize={48}
-        />
+        <Bar dataKey="value" fill="var(--color-value)" radius={[8, 8, 4, 4]} maxBarSize={48} />
       </BarChart>
     </ChartContainer>
   )

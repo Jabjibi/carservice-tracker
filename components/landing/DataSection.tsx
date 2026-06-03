@@ -62,8 +62,18 @@ export async function DataSection() {
   const t = await getTranslations('data')
 
   const expenses = [
-    { icon: Wrench, label: t('expense1Label'), percent: t('expense1Percent'), amount: t('expense1Amount') },
-    { icon: Fuel, label: t('expense2Label'), percent: t('expense2Percent'), amount: t('expense2Amount') },
+    {
+      icon: Wrench,
+      label: t('expense1Label'),
+      percent: t('expense1Percent'),
+      amount: t('expense1Amount'),
+    },
+    {
+      icon: Fuel,
+      label: t('expense2Label'),
+      percent: t('expense2Percent'),
+      amount: t('expense2Amount'),
+    },
   ]
 
   return (
@@ -72,12 +82,12 @@ export async function DataSection() {
         {/* Left */}
         <div className="flex flex-1 flex-col gap-5">
           <div>
-            <h2 className="text-balance text-[26px] font-semibold leading-tight tracking-tight text-[#1D1D1F] sm:text-[30px] md:text-[34px]">
+            <h2 className="text-[26px] leading-tight font-semibold tracking-tight text-balance text-[#1D1D1F] sm:text-[30px] md:text-[34px]">
               {t('title1')}
               <br />
               {t('title2')}
             </h2>
-            <p className="mt-2 text-pretty text-sm leading-relaxed text-zinc-500 md:text-[15px]">
+            <p className="mt-2 text-sm leading-relaxed text-pretty text-zinc-500 md:text-[15px]">
               {t('subtitle')}
             </p>
           </div>
@@ -91,8 +101,8 @@ export async function DataSection() {
                   className="rounded-2xl border-0 bg-[#F5F5F7] shadow-none ring-0"
                 >
                   <CardContent className="flex items-center gap-3 p-3.5">
-                    <div className="flex size-9 items-center justify-center rounded-xl bg-green/10">
-                      <Icon className="size-4 text-green" />
+                    <div className="bg-green/10 flex size-9 items-center justify-center rounded-xl">
+                      <Icon className="text-green size-4" />
                     </div>
                     <div className="flex-1">
                       <p className="text-sm font-semibold text-[#1D1D1F]">{item.label}</p>
@@ -110,11 +120,11 @@ export async function DataSection() {
 
         {/* Right — chart */}
         <div className="flex-[1.4]">
-          <Card className="rounded-2xl border-0 bg-dark-void ring-1 ring-dark-border">
+          <Card className="bg-dark-void ring-dark-border rounded-2xl border-0 ring-1">
             <CardContent className="p-5">
               <div className="mb-4 flex items-center justify-between">
                 <p className="text-sm font-semibold text-white">{t('chartTitle')}</p>
-                <span className="rounded-full bg-dark-elevated px-3 py-1 text-xs text-white/60">
+                <span className="bg-dark-elevated rounded-full px-3 py-1 text-xs text-white/60">
                   {t('chartPeriod')}
                 </span>
               </div>

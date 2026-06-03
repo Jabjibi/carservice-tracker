@@ -17,9 +17,9 @@ export default async function LoginPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-[#F5F5F7] px-6">
       <div className="w-full max-w-sm">
-        <div className="relative overflow-hidden rounded-[20px] bg-dark-void shadow-sm ring-1 ring-white/[0.08]">
+        <div className="bg-dark-void relative overflow-hidden rounded-[20px] shadow-sm ring-1 ring-white/[0.08]">
           {/* Logo — top-left */}
-          <div className="absolute left-4 top-4 z-10">
+          <div className="absolute top-4 left-4 z-10">
             <Link href={`/${locale}`} aria-label="Car Service Tracker">
               <Image
                 src="/image/logo.png"
@@ -45,15 +45,13 @@ export default async function LoginPage() {
           </div>
 
           {/* Content */}
-          <div className="px-8 pb-8 pt-0">
+          <div className="px-8 pt-0 pb-8">
             {/* Heading */}
             <div className="mb-7 text-center">
               <h1 className="text-[22px] font-semibold tracking-tight text-white">
                 {t('tagline')}
               </h1>
-              <p className="mt-2 text-[14px] leading-relaxed text-white/50">
-                {t('subtitle')}
-              </p>
+              <p className="mt-2 text-[14px] leading-relaxed text-white/50">{t('subtitle')}</p>
             </div>
 
             {/* LINE login button */}
@@ -70,11 +68,17 @@ export default async function LoginPage() {
             {/* Terms */}
             <p className="mt-5 text-center text-[11px] leading-relaxed text-white/25">
               {t('termsPrefix')}{' '}
-              <Link href={`/${locale}#`} className="underline underline-offset-2 hover:text-white/50">
+              <Link
+                href={`/${locale}#`}
+                className="underline underline-offset-2 hover:text-white/50"
+              >
                 {t('termsLink')}
               </Link>{' '}
               {t('and')}{' '}
-              <Link href={`/${locale}#`} className="underline underline-offset-2 hover:text-white/50">
+              <Link
+                href={`/${locale}#`}
+                className="underline underline-offset-2 hover:text-white/50"
+              >
                 {t('privacyLink')}
               </Link>
             </p>

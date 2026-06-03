@@ -12,11 +12,11 @@ async function CarCardMockup() {
   return (
     <div className="relative w-full max-w-[380px]">
       {/* Status badge — floats outside card top-right */}
-      <div className="absolute -top-3 right-3 z-10 rounded-full bg-green px-3 py-1 text-xs font-semibold text-white shadow-lg">
+      <div className="bg-green absolute -top-3 right-3 z-10 rounded-full px-3 py-1 text-xs font-semibold text-white shadow-lg">
         {t('statusOk')}
       </div>
 
-      <Card className="w-full rounded-2xl bg-dark-void shadow-2xl ring-1 ring-dark-border">
+      <Card className="bg-dark-void ring-dark-border w-full rounded-2xl shadow-2xl ring-1">
         <CardContent className="p-4">
           {/* Car info row */}
           <div className="mb-4 flex items-start justify-between">
@@ -24,13 +24,13 @@ async function CarCardMockup() {
               <p className="text-[17px] font-semibold text-white">{t('carName')}</p>
               <p className="mt-0.5 font-mono text-xs text-white/40">{t('plate')}</p>
             </div>
-            <span className="flex size-9 items-center justify-center rounded-full bg-dark-elevated">
+            <span className="bg-dark-elevated flex size-9 items-center justify-center rounded-full">
               <Car className="size-4 text-white/70" />
             </span>
           </div>
 
           {/* Car image */}
-          <div className="relative mb-4 h-52 overflow-hidden rounded-xl bg-dark-surface">
+          <div className="bg-dark-surface relative mb-4 h-52 overflow-hidden rounded-xl">
             <Image
               src="/image/car.png"
               alt={t('carName')}
@@ -44,25 +44,25 @@ async function CarCardMockup() {
 
           {/* Stats */}
           <div className="mb-3 grid grid-cols-2 gap-2">
-            <div className="rounded-xl bg-dark-elevated p-3">
+            <div className="bg-dark-elevated rounded-xl p-3">
               <p className="mb-1 text-[11px] text-white/40">{t('mileageLabel')}</p>
               <p className="font-mono text-sm font-semibold text-white">{t('mileageValue')}</p>
             </div>
-            <div className="rounded-xl bg-dark-elevated p-3">
+            <div className="bg-dark-elevated rounded-xl p-3">
               <p className="mb-1 text-[11px] text-white/40">{t('serviceLabel')}</p>
-              <p className="font-mono text-sm font-semibold text-green">{t('serviceValue')}</p>
+              <p className="text-green font-mono text-sm font-semibold">{t('serviceValue')}</p>
             </div>
           </div>
 
           {/* LINE toggle row */}
-          <div className="flex items-center justify-between rounded-xl bg-dark-elevated px-3 py-2.5">
+          <div className="bg-dark-elevated flex items-center justify-between rounded-xl px-3 py-2.5">
             <div className="flex items-center gap-2.5">
-              <span className="flex size-6 items-center justify-center rounded-full bg-green">
+              <span className="bg-green flex size-6 items-center justify-center rounded-full">
                 <Bell className="size-3 text-white" />
               </span>
               <span className="text-xs text-white/70">{t('lineNotify')}</span>
             </div>
-            <div className="flex h-5 w-9 items-center justify-end rounded-full bg-green px-0.5">
+            <div className="bg-green flex h-5 w-9 items-center justify-end rounded-full px-0.5">
               <div className="size-4 rounded-full bg-white shadow-sm" />
             </div>
           </div>
@@ -74,11 +74,7 @@ async function CarCardMockup() {
 
 async function SocialProof() {
   const t = await getTranslations('hero')
-  const avatars = [
-    { bg: 'bg-zinc-300' },
-    { bg: 'bg-zinc-500' },
-    { bg: 'bg-zinc-400' },
-  ]
+  const avatars = [{ bg: 'bg-zinc-300' }, { bg: 'bg-zinc-500' }, { bg: 'bg-zinc-400' }]
   return (
     <div className="flex items-center gap-3">
       <div className="flex -space-x-2.5">
@@ -119,7 +115,7 @@ export async function HeroSection() {
         {/* Left — Copy */}
         <div className="flex w-full flex-col gap-5 md:max-w-[480px] md:shrink-0">
           <h1
-            className="font-bold leading-[1.05] tracking-tight text-balance text-[#1D1D1F]"
+            className="leading-[1.05] font-bold tracking-tight text-balance text-[#1D1D1F]"
             style={{ fontSize: 'clamp(32px, 5vw, 56px)' }}
           >
             <span>{t('headline1')}</span>
@@ -127,7 +123,7 @@ export async function HeroSection() {
             <span className="text-green">{t('headline2')}</span>
           </h1>
 
-          <p className="text-pretty text-[15px] leading-relaxed text-zinc-500 md:text-[17px]">
+          <p className="text-[15px] leading-relaxed text-pretty text-zinc-500 md:text-[17px]">
             {t('subtitle')}
           </p>
 
@@ -135,7 +131,7 @@ export async function HeroSection() {
           <div className="flex flex-wrap gap-3">
             <Button
               asChild
-              className="h-12 gap-2 rounded-xl bg-green px-6 text-sm font-semibold text-white hover:bg-green-hover"
+              className="bg-green hover:bg-green-hover h-12 gap-2 rounded-xl px-6 text-sm font-semibold text-white"
             >
               <Link href={`/${locale}/login`}>
                 <LineIcon className="size-4" />

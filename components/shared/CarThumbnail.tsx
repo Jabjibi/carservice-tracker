@@ -23,13 +23,7 @@ export function CarThumbnail({ type, alt = '', className }: CarThumbnailProps) {
         className,
       )}
     >
-      <Image
-        src={SRC[type]}
-        alt={alt}
-        fill
-        sizes="48px"
-        className="object-contain p-1.5"
-      />
+      <Image src={SRC[type]} alt={alt} fill sizes="48px" className="object-contain p-1.5" />
     </div>
   )
 }

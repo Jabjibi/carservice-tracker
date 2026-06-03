@@ -88,9 +88,11 @@ lib/
 ### Metadata Rules
 
 #### 1. Server Components only
+
 `metadata` / `generateMetadata` **must be exported from Server Components only**.
 
 If a page has `'use client'`, extract metadata first:
+
 - Remove `'use client'` from the page and move client logic into a child component
 - Or export metadata from the route's `layout.tsx`
 
@@ -100,10 +102,13 @@ import type { Metadata } from 'next'
 import { DashboardClient } from './_components/DashboardClient' // 'use client' lives here
 
 export const metadata: Metadata = { title: 'Dashboard', description: '...' }
-export default function Page() { return <DashboardClient /> }
+export default function Page() {
+  return <DashboardClient />
+}
 ```
 
 #### 2. Title template
+
 Root layout already sets the template — every page only needs a short title:
 
 ```tsx
@@ -114,18 +119,23 @@ export const metadata: Metadata = {
 
 // Every page — short title only, template appends the rest
 export const metadata: Metadata = {
-  title: 'Dashboard',        // → "Dashboard | Car Service Tracker"
+  title: 'Dashboard', // → "Dashboard | Car Service Tracker"
   description: 'Overview of your vehicles and expenses',
 }
 ```
 
 #### 3. Static vs Dynamic
+
 - **Static** (`export const metadata`) — use for pages where the title does not depend on data
 - **Dynamic** (`export async function generateMetadata`) — use when the title comes from route params, e.g. `/cars/[id]`
 
 ```tsx
 // Dynamic — individual car detail page
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
   const { id } = await params
   const car = await getCar(id)
   return { title: car.name, description: `Service history for ${car.name}` }
@@ -133,6 +143,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 ```
 
 #### 4. Viewport — export separately
+
 Do not put viewport inside `metadata` — export it as a separate constant:
 
 ```tsx
@@ -141,6 +152,7 @@ export const viewport: Viewport = { width: 'device-width', initialScale: 1, them
 ```
 
 #### 5. Checklist — every page
+
 - [ ] `title` — short, descriptive (template appends brand automatically)
 - [ ] `description` — one sentence describing the page
 - [ ] Exported from a Server Component only
@@ -213,3 +225,43 @@ Always use `lucide-react`. No other icon libraries.
 - `/public/cars/car-pickup.png` — pickup
 - `/public/cars/car-van.png` — van
 - `/public/cars/motorcycle.png` — motorcycle
+
+### After Every Code Change
+
+Always run in order:
+
+```bash
+npm run lint     # must pass with 0 errors
+npm run format   # auto-formats all files
+```
+
+If lint fails, fix the error before committing — never suppress with `eslint-disable` unless there is a documented reason.
+
+#### Common lint rule: `react-hooks/set-state-in-effect`
+
+Do **not** call `setState` synchronously inside `useEffect`. Initialize state with a lazy initializer instead:
+
+```ts
+// ❌ triggers lint error
+useEffect(() => {
+  setState(someValue)   // synchronous setState in effect body
+  ...
+}, [])
+
+// ✅ correct — lazy initializer runs once on mount, not inside effect
+const [value, setValue] = useState(() => someValue)
+
+useEffect(() => {
+  // effect only subscribes / cleans up
+}, [])
+```
+
+#### When moving files — check all dependents
+
+If a file is moved (e.g. `hooks/` → `lib/hooks/`), grep for every import before moving:
+
+```bash
+grep -rn "from '@/hooks/" app/ components/
+```
+
+`components/ui/sidebar.tsx` imports `useIsMobile` from `@/lib/hooks/use-mobile` — update this path if hooks are ever relocated again.

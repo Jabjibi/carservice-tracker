@@ -7,7 +7,7 @@ import { ChartPreview } from './ChartPreview'
 async function HistoryPreview() {
   const t = await getTranslations('features.history')
   return (
-    <div className="mt-3 space-y-2 rounded-xl bg-dark-void p-3">
+    <div className="bg-dark-void mt-3 space-y-2 rounded-xl p-3">
       {([t('item1'), t('item2')] as string[]).map((label) => (
         <div key={label} className="flex items-center justify-between">
           <span className="text-xs text-white/50">{label}</span>
@@ -23,9 +23,9 @@ async function HistoryPreview() {
 async function LineNotifyPreview() {
   const t = await getTranslations('features.line')
   return (
-    <div className="mt-3 rounded-xl bg-dark-void p-3">
+    <div className="bg-dark-void mt-3 rounded-xl p-3">
       <div className="flex items-start gap-2">
-        <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-green">
+        <div className="bg-green flex size-7 shrink-0 items-center justify-center rounded-full">
           <MessageCircle className="size-3.5 text-white" />
         </div>
         <div className="rounded-xl rounded-tl-none bg-white/10 px-3 py-2">
@@ -35,7 +35,6 @@ async function LineNotifyPreview() {
     </div>
   )
 }
-
 
 function FeatureCard({
   icon: Icon,
@@ -49,9 +48,9 @@ function FeatureCard({
   children: React.ReactNode
 }) {
   return (
-    <Card className="h-full rounded-2xl border-0 bg-dark-card ring-1 ring-dark-border">
+    <Card className="bg-dark-card ring-dark-border h-full rounded-2xl border-0 ring-1">
       <CardContent className="flex h-full flex-col p-5">
-        <div className="mb-3 flex size-9 items-center justify-center rounded-xl bg-dark-elevated">
+        <div className="bg-dark-elevated mb-3 flex size-9 items-center justify-center rounded-xl">
           <Icon className="size-4 text-white/70" />
         </div>
         <h3 className="mb-1.5 text-base font-semibold text-white">{title}</h3>
@@ -69,10 +68,10 @@ export async function FeaturesSection() {
     <section id="features" className="bg-dark-void py-12 md:py-14">
       <LandingContainer>
         <div className="mb-8 text-center">
-          <h2 className="text-balance text-[26px] font-semibold tracking-tight text-white sm:text-[30px] md:text-[34px]">
+          <h2 className="text-[26px] font-semibold tracking-tight text-balance text-white sm:text-[30px] md:text-[34px]">
             {t('title')}
           </h2>
-          <p className="mt-2 text-pretty text-sm text-white/50 md:text-[15px]">{t('subtitle')}</p>
+          <p className="mt-2 text-sm text-pretty text-white/50 md:text-[15px]">{t('subtitle')}</p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">

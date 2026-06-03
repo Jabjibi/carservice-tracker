@@ -18,50 +18,53 @@ export async function LandingNav() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 border-b border-dark-border bg-dark-void">
+    <header className="border-dark-border bg-dark-void sticky top-0 z-50 border-b">
       <nav>
         <LandingContainer className="flex h-16 items-center justify-between md:h-20">
-        {/* Logo */}
-        <Link href={`/${locale}`} className="flex items-center" aria-label="AutoTracker">
-          <Image
-            src="/image/logo.png"
-            alt="AutoTracker"
-            width={120}
-            height={80}
-            priority
-            className="h-20 w-auto md:h-24"
-          />
-        </Link>
+          {/* Logo */}
+          <Link href={`/${locale}`} className="flex items-center" aria-label="AutoTracker">
+            <Image
+              src="/image/logo.png"
+              alt="AutoTracker"
+              width={120}
+              height={80}
+              priority
+              className="h-20 w-auto md:h-24"
+            />
+          </Link>
 
-        {/* Nav links */}
-        <ul className="hidden items-center gap-7 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className={cn('text-sm text-white/60 transition-colors hover:text-white', 'font-thai')}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+          {/* Nav links */}
+          <ul className="hidden items-center gap-7 md:flex">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={cn(
+                    'text-sm text-white/60 transition-colors hover:text-white',
+                    'font-thai',
+                  )}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-        {/* Right: language switcher + CTA */}
-        <div className="flex items-center gap-3">
-          <LanguageSwitcher currentLocale={locale} />
-          <Button
-            asChild
-            className="gap-2 rounded-full bg-green px-4 text-sm font-semibold text-white hover:bg-green-hover"
-            size="sm"
-          >
-            <Link href="/login">
-              <LineIcon className="size-4" />
-              {t('login')}
-            </Link>
-          </Button>
-        </div>
-      </LandingContainer>
+          {/* Right: language switcher + CTA */}
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher currentLocale={locale} />
+            <Button
+              asChild
+              className="bg-green hover:bg-green-hover gap-2 rounded-full px-4 text-sm font-semibold text-white"
+              size="sm"
+            >
+              <Link href="/login">
+                <LineIcon className="size-4" />
+                {t('login')}
+              </Link>
+            </Button>
+          </div>
+        </LandingContainer>
       </nav>
     </header>
   )

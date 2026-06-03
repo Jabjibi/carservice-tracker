@@ -65,12 +65,8 @@ export default function DashboardPage() {
         <SectionCard className="xl:col-span-2">
           <header className="mb-6 flex items-start justify-between">
             <div>
-              <h2 className="text-[15px] font-semibold text-[#1D1D1F]">
-                {t('chartTitle')}
-              </h2>
-              <p className="mt-1 text-[12px] text-[#86868B]">
-                {t('chartSubtitle')}
-              </p>
+              <h2 className="text-[15px] font-semibold text-[#1D1D1F]">{t('chartTitle')}</h2>
+              <p className="mt-1 text-[12px] text-[#86868B]">{t('chartSubtitle')}</p>
             </div>
             <span className="rounded-full bg-black/[0.04] px-2.5 py-1 text-[11px] font-medium text-[#6E6E73] ring-1 ring-black/[0.05]">
               {t('chartRange')}
@@ -80,11 +76,7 @@ export default function DashboardPage() {
         </SectionCard>
 
         <SectionCard>
-          <UpcomingServiceList
-            items={upcoming}
-            selectedId={selectedId}
-            onSelect={select}
-          />
+          <UpcomingServiceList items={upcoming} selectedId={selectedId} onSelect={select} />
         </SectionCard>
       </div>
 
@@ -97,14 +89,8 @@ export default function DashboardPage() {
       <Fab.Root>
         <Fab.Trigger label={t('fab.trigger')} />
         <Fab.Menu>
-          <Fab.Item
-            icon={<Wrench className="size-3.5" />}
-            label={t('fab.logService')}
-          />
-          <Fab.Item
-            icon={<Car className="size-3.5" />}
-            label={t('fab.addCar')}
-          />
+          <Fab.Item icon={<Wrench className="size-3.5" />} label={t('fab.logService')} />
+          <Fab.Item icon={<Car className="size-3.5" />} label={t('fab.addCar')} />
         </Fab.Menu>
       </Fab.Root>
     </>

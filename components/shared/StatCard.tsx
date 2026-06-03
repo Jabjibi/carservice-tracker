@@ -18,16 +18,12 @@ export function StatCard({ label, value, unit, hint, icon: Icon }: StatCardProps
         </span>
       </div>
       <div className="mt-5 flex items-baseline gap-1.5">
-        <span className="text-[32px] font-semibold leading-none tracking-tight text-[#1D1D1F]">
+        <span className="text-[32px] leading-none font-semibold tracking-tight text-[#1D1D1F]">
           {value}
         </span>
-        {unit && (
-          <span className="text-[15px] font-medium text-[#6E6E73]">{unit}</span>
-        )}
+        {unit && <span className="text-[15px] font-medium text-[#6E6E73]">{unit}</span>}
       </div>
-      {hint && (
-        <p className="mt-3 text-[12px] text-[#86868B]">{hint}</p>
-      )}
+      {hint && <p className="mt-3 text-[12px] text-[#86868B]">{hint}</p>}
     </div>
   )
 }

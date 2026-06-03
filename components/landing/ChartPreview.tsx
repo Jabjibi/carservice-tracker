@@ -23,7 +23,7 @@ const chartConfig = {
 
 export function ChartPreview() {
   return (
-    <div className="mt-3 rounded-xl bg-dark-void p-3">
+    <div className="bg-dark-void mt-3 rounded-xl p-3">
       <ChartContainer config={chartConfig} className="h-[56px] w-full">
         <BarChart data={chartData} barSize={10} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
           <Bar dataKey="expense" fill="var(--color-expense)" radius={2} />

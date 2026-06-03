@@ -14,17 +14,11 @@ type UpcomingServiceListProps = {
   onSelect: (id: string) => void
 }
 
-export function UpcomingServiceList({
-  items,
-  selectedId,
-  onSelect,
-}: UpcomingServiceListProps) {
+export function UpcomingServiceList({ items, selectedId, onSelect }: UpcomingServiceListProps) {
   return (
     <div className="flex h-full flex-col">
       <header className="mb-4 flex items-baseline justify-between">
-        <h2 className="text-[15px] font-semibold text-[#1D1D1F]">
-          บริการที่กำลังจะถึง
-        </h2>
+        <h2 className="text-[15px] font-semibold text-[#1D1D1F]">บริการที่กำลังจะถึง</h2>
       </header>
       <p className="mb-4 text-[12px] text-[#86868B]">เรียงตามความเร่งด่วน</p>
 
@@ -53,9 +47,7 @@ export function UpcomingServiceList({
                     <StatusDot status={item.status} />
                   </div>
                   <LicensePlate value={item.plate} className="mt-0.5 block" />
-                  <p className="mt-0.5 text-[12px] text-[#6E6E73]">
-                    {item.dueDate}
-                  </p>
+                  <p className="mt-0.5 text-[12px] text-[#6E6E73]">{item.dueDate}</p>
                 </div>
               </button>
             </li>

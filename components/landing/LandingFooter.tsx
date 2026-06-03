@@ -13,7 +13,7 @@ export async function LandingFooter() {
   ]
 
   return (
-    <footer className="border-t border-dark-border bg-dark-void py-6">
+    <footer className="border-dark-border bg-dark-void border-t py-6">
       <LandingContainer className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-2 text-white/30">
           <Wrench className="size-3.5" />

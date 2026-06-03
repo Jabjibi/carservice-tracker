@@ -14,7 +14,7 @@ export function LanguageSwitcher({ currentLocale }: { currentLocale: string }) {
   }
 
   return (
-    <div className="flex items-center gap-0.5 rounded-full border border-dark-border px-1.5 py-1">
+    <div className="border-dark-border flex items-center gap-0.5 rounded-full border px-1.5 py-1">
       {routing.locales.map((locale) => (
         <button
           key={locale}
