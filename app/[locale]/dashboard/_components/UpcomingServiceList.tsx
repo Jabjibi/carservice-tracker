@@ -2,6 +2,7 @@
 
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 import { CarThumbnail } from '@/components/shared/CarThumbnail'
 import { LicensePlate } from '@/components/shared/LicensePlate'
 import { StatusDot } from '@/components/shared/StatusDot'
@@ -62,13 +63,13 @@ export function UpcomingServiceList({
         })}
       </ul>
 
-      <button
-        type="button"
-        className="mt-4 flex items-center justify-center gap-2 rounded-[12px] bg-white/[0.5] py-2.5 text-[13px] font-medium text-[#1D1D1F] ring-1 ring-black/[0.06] transition hover:bg-white/[0.75]"
+      <Button
+        variant="ghost"
+        className="mt-4 w-full rounded-[12px] bg-white/[0.5] py-2.5 text-[13px] font-medium text-[#1D1D1F] ring-1 ring-black/[0.06] hover:bg-white/[0.75] hover:text-[#1D1D1F]"
       >
         ดูรถทั้งหมด
         <ArrowRight className="size-3.5" />
-      </button>
+      </Button>
     </div>
   )
 }

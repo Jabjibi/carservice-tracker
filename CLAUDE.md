@@ -81,16 +81,66 @@ hooks/
 - Metadata: export `metadata` or `generateMetadata` from Server Components only
 - Fonts: use `next/font/google` only (no `<link>` tags)
 
-### Metadata Pattern (every page)
+### Metadata Rules
+
+#### 1. Server Components only
+`metadata` / `generateMetadata` **must be exported from Server Components only**.
+
+If a page has `'use client'`, extract metadata first:
+- Remove `'use client'` from the page and move client logic into a child component
+- Or export metadata from the route's `layout.tsx`
 
 ```tsx
+// ✅ page.tsx — Server Component
+import type { Metadata } from 'next'
+import { DashboardClient } from './_components/DashboardClient' // 'use client' lives here
+
+export const metadata: Metadata = { title: 'Dashboard', description: '...' }
+export default function Page() { return <DashboardClient /> }
+```
+
+#### 2. Title template
+Root layout already sets the template — every page only needs a short title:
+
+```tsx
+// app/[locale]/layout.tsx (root)
 export const metadata: Metadata = {
-  title: 'Page Title | Car Service Tracker',
-  description: '...',
+  title: { default: 'Car Service Tracker', template: '%s | Car Service Tracker' },
+}
+
+// Every page — short title only, template appends the rest
+export const metadata: Metadata = {
+  title: 'Dashboard',        // → "Dashboard | Car Service Tracker"
+  description: 'Overview of your vehicles and expenses',
 }
 ```
 
-Root layout uses title template: `{ default: 'Car Service Tracker', template: '%s | Car Service Tracker' }`
+#### 3. Static vs Dynamic
+- **Static** (`export const metadata`) — use for pages where the title does not depend on data
+- **Dynamic** (`export async function generateMetadata`) — use when the title comes from route params, e.g. `/cars/[id]`
+
+```tsx
+// Dynamic — individual car detail page
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const car = await getCar(id)
+  return { title: car.name, description: `Service history for ${car.name}` }
+}
+```
+
+#### 4. Viewport — export separately
+Do not put viewport inside `metadata` — export it as a separate constant:
+
+```tsx
+import type { Viewport } from 'next'
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#FFFFFF' }
+```
+
+#### 5. Checklist — every page
+- [ ] `title` — short, descriptive (template appends brand automatically)
+- [ ] `description` — one sentence describing the page
+- [ ] Exported from a Server Component only
+- [ ] If page is `'use client'` → extract client logic into a child component first
 
 ### Design System Tokens (Tailwind custom vars)
 
