@@ -19,6 +19,17 @@
   --color-dark-card: #1a1a1a;
   --color-dark-elevated: #222222;
   --color-dark-border: rgba(255, 255, 255, 0.08);
+  /* Liquid glass (sidebar / floating surfaces on dark bg) */
+  --color-glass: rgba(255, 255, 255, 0.04);
+  --color-glass-hover: rgba(255, 255, 255, 0.08);
+  --color-glass-active: rgba(255, 255, 255, 0.12);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-border-strong: rgba(255, 255, 255, 0.14);
+  /* Text on dark */
+  --color-on-dark: rgba(255, 255, 255, 0.95);
+  --color-on-dark-secondary: rgba(255, 255, 255, 0.55);
+  --color-on-dark-muted: rgba(255, 255, 255, 0.35);
+  --color-on-dark-disabled: rgba(255, 255, 255, 0.2);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);

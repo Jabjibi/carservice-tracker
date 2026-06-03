@@ -75,5 +75,34 @@
     "privacy": "นโยบายความเป็นส่วนตัว",
     "terms": "เงื่อนไขการให้บริการ",
     "contact": "ติดต่อเรา"
+  },
+  "sidebar": {
+    "dashboard": "แดชบอร์ด",
+    "cars": "รถของฉัน",
+    "notifications": "การแจ้งเตือน"
+  },
+  "dashboard": {
+    "greetingSubtitle": "ภาพรวมการดูแลรถของคุณ",
+    "stats": {
+      "totalCars": "รถทั้งหมด",
+      "totalCarsUnit": "คัน",
+      "totalCarsHint": "ลงทะเบียนแล้ว",
+      "servicesThisYear": "บริการปีนี้",
+      "servicesThisYearUnit": "ครั้ง",
+      "servicesThisYearHint": "ตั้งแต่ต้นปี 2567",
+      "totalExpense": "ค่าใช้จ่ายรวม",
+      "totalExpenseHint": "ปีนี้ทั้งหมด",
+      "upcomingCount": "ใกล้ถึงรอบ",
+      "upcomingCountUnit": "คัน",
+      "upcomingCountHint": "ต้องการดูแล"
+    },
+    "chartTitle": "ค่าใช้จ่ายการซ่อมบำรุง",
+    "chartSubtitle": "รายเดือน ปี 2567",
+    "chartRange": "6 เดือนล่าสุด",
+    "fab": {
+      "trigger": "เพิ่ม",
+      "logService": "บันทึกการซ่อม",
+      "addCar": "เพิ่มรถใหม่"
+    }
   }
 }
