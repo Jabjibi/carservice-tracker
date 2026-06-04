@@ -23,6 +23,8 @@ Design: strict monochrome (Apple × Tesla) — only exception is LINE green `#06
 1. Read `.agents/skills/next-best-practices/` relevant docs
 2. Read `.agents/skills/vercel-composition-patterns/AGENTS.md` for component architecture
 3. Read `.agents/skills/typescript-pro/SKILL.md` for type patterns
+4. Read `.agents/skills/next-cache-components/SKILL.md` for caching patterns
+5. Read `.agents/skills/frontend-design/SKILL.md` for UI/design standards
 
 ### Component Rules (from vercel-composition-patterns)
 
