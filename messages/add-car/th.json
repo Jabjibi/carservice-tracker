@@ -1,0 +1,26 @@
+{
+  "addCar": {
+    "title": "เพิ่มรถใหม่",
+    "back": "รถของฉัน",
+    "typeLabel": "ประเภทรถ",
+    "types": {
+      "sedan": "รถเก๋ง",
+      "pickup": "รถกระบะ",
+      "van": "รถตู้",
+      "motorcycle": "มอเตอร์ไซค์"
+    },
+    "brand": "ยี่ห้อ",
+    "brandPlaceholder": "เช่น Honda, Toyota",
+    "model": "รุ่น",
+    "modelPlaceholder": "เช่น Civic, Camry",
+    "year": "ปีที่ผลิต",
+    "yearPlaceholder": "เช่น 2021",
+    "plate": "ทะเบียนรถ",
+    "platePlaceholder": "เช่น กข-1234",
+    "color": "สี (ไม่บังคับ)",
+    "colorPlaceholder": "เช่น ขาว, ดำ",
+    "mileage": "เลขไมล์ปัจจุบัน (ไม่บังคับ)",
+    "mileagePlaceholder": "เช่น 48500",
+    "submit": "บันทึกรถ"
+  }
+}

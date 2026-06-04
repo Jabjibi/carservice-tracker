@@ -1,0 +1,26 @@
+{
+  "addCar": {
+    "title": "Add New Car",
+    "back": "My Cars",
+    "typeLabel": "Vehicle type",
+    "types": {
+      "sedan": "Sedan",
+      "pickup": "Pickup",
+      "van": "Van",
+      "motorcycle": "Motorcycle"
+    },
+    "brand": "Brand",
+    "brandPlaceholder": "e.g. Honda, Toyota",
+    "model": "Model",
+    "modelPlaceholder": "e.g. Civic, Camry",
+    "year": "Year",
+    "yearPlaceholder": "e.g. 2021",
+    "plate": "License plate",
+    "platePlaceholder": "e.g. ABC-1234",
+    "color": "Color (optional)",
+    "colorPlaceholder": "e.g. White, Black",
+    "mileage": "Current mileage (optional)",
+    "mileagePlaceholder": "e.g. 48500",
+    "submit": "Save car"
+  }
+}
