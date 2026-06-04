@@ -9,8 +9,18 @@ export default getRequestConfig(async () => {
   const raw = cookieStore.get('NEXT_LOCALE')?.value
   const locale: Locale = SUPPORTED_LOCALES.includes(raw as Locale) ? (raw as Locale) : 'th'
 
+  const [landingpage, dashboard, mycar] = await Promise.all([
+    import(`../messages/landingpage/${locale}.json`),
+    import(`../messages/dashboard/${locale}.json`),
+    import(`../messages/mycar/${locale}.json`),
+  ])
+
   return {
     locale,
-    messages: (await import(`../messages/landingpage/${locale}.json`)).default,
+    messages: {
+      ...landingpage.default,
+      ...dashboard.default,
+      ...mycar.default,
+    },
   }
 })
