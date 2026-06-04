@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { useAddCarForm, CAR_TYPES } from '@/lib/hooks/use-add-car-form'
 import { CarThumbnail } from '@/components/shared/CarThumbnail'
+import { FormField } from '@/components/shared/FormField'
 import { SectionCard } from '@/components/shared/SectionCard'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -73,7 +74,7 @@ export function AddCarClient() {
 
         {/* Required fields */}
         <SectionCard className="flex flex-col gap-4">
-          <Field label={t('brand')}>
+          <FormField label={t('brand')}>
             <Input
               value={state.brand}
               onChange={(e) => actions.setBrand(e.target.value)}
@@ -81,8 +82,8 @@ export function AddCarClient() {
               required
               className={inputClass}
             />
-          </Field>
-          <Field label={t('model')}>
+          </FormField>
+          <FormField label={t('model')}>
             <Input
               value={state.model}
               onChange={(e) => actions.setModel(e.target.value)}
@@ -90,9 +91,9 @@ export function AddCarClient() {
               required
               className={inputClass}
             />
-          </Field>
+          </FormField>
           <div className="grid grid-cols-2 gap-4">
-            <Field label={t('year')}>
+            <FormField label={t('year')}>
               <Input
                 type="number"
                 value={state.year}
@@ -103,8 +104,8 @@ export function AddCarClient() {
                 required
                 className={inputClass}
               />
-            </Field>
-            <Field label={t('plate')}>
+            </FormField>
+            <FormField label={t('plate')}>
               <Input
                 value={state.plate}
                 onChange={(e) => actions.setPlate(e.target.value)}
@@ -112,21 +113,21 @@ export function AddCarClient() {
                 required
                 className={cn(inputClass, 'font-mono tracking-tight')}
               />
-            </Field>
+            </FormField>
           </div>
         </SectionCard>
 
         {/* Optional fields */}
         <SectionCard className="flex flex-col gap-4">
-          <Field label={t('color')}>
+          <FormField label={t('color')}>
             <Input
               value={state.color}
               onChange={(e) => actions.setColor(e.target.value)}
               placeholder={t('colorPlaceholder')}
               className={inputClass}
             />
-          </Field>
-          <Field label={t('mileage')}>
+          </FormField>
+          <FormField label={t('mileage')}>
             <Input
               type="number"
               value={state.mileage}
@@ -135,7 +136,7 @@ export function AddCarClient() {
               min={0}
               className={inputClass}
             />
-          </Field>
+          </FormField>
         </SectionCard>
 
         <Button
@@ -146,14 +147,5 @@ export function AddCarClient() {
         </Button>
       </form>
     </>
-  )
-}
-
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label className="text-text-primary text-[13px] font-medium">{label}</label>
-      {children}
-    </div>
   )
 }

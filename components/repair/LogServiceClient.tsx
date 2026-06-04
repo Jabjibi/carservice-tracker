@@ -1,16 +1,43 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ChevronLeft } from 'lucide-react'
+import {
+  Banknote,
+  CalendarDays,
+  ChevronLeft,
+  ClipboardCheck,
+  ClipboardList,
+  Disc3,
+  Droplets,
+  Filter,
+  Gauge,
+  Wrench,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { cn, baht } from '@/lib/utils'
 import { useCar } from '@/lib/hooks/use-car'
-import { useLogServiceForm, SERVICE_TYPES } from '@/lib/hooks/use-log-service-form'
+import {
+  useLogServiceForm,
+  SERVICE_TYPES,
+  type ServiceTypeKey,
+} from '@/lib/hooks/use-log-service-form'
+import { FormField } from '@/components/shared/FormField'
 import { Stepper } from '@/components/shared/Stepper'
 import { SectionCard } from '@/components/shared/SectionCard'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
+
+const SERVICE_ICON: Record<ServiceTypeKey, LucideIcon> = {
+  oil: Droplets,
+  tire: Disc3,
+  filter: Filter,
+  brake: Gauge,
+  electrical: Zap,
+  inspection: ClipboardList,
+  other: Wrench,
+}
 
 const inputClass =
   'h-11 rounded-[10px] border-black/[0.1] bg-white/[0.6] px-3 text-[14px] text-text-primary placeholder:text-text-disabled focus-visible:border-black/[0.2] focus-visible:ring-0'
@@ -19,23 +46,21 @@ type Props = { id: string }
 
 export function LogServiceClient({ id }: Props) {
   const t = useTranslations('logService')
-  const router = useRouter()
   const car = useCar(id)
-  const { state, actions, meta } = useLogServiceForm()
+  const { state, actions, meta } = useLogServiceForm(id)
 
-  const backHref = id ? `/mycar/${id}` : '/mycar'
+  const stepLabels = [t('steps.type'), t('steps.datetime'), t('steps.cost'), t('steps.confirm')]
+  const stepIcons = [Wrench, CalendarDays, Banknote, ClipboardCheck] as const
 
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault()
-    router.push(backHref)
+    actions.submit()
   }
-
-  const stepLabels = [t('steps.type'), t('steps.datetime'), t('steps.cost'), t('steps.confirm')]
 
   return (
     <>
       <Link
-        href={backHref}
+        href={meta.backHref}
         className="text-text-secondary hover:text-text-primary mb-6 flex w-fit items-center gap-1 text-[13px] transition"
       >
         <ChevronLeft className="size-4" />
@@ -51,6 +76,7 @@ export function LogServiceClient({ id }: Props) {
           currentStep={state.step}
           totalSteps={meta.totalSteps}
           labels={stepLabels}
+          icons={stepIcons}
           canAdvance={meta.canAdvance}
           onNext={actions.next}
           onBack={actions.back}
@@ -61,23 +87,30 @@ export function LogServiceClient({ id }: Props) {
             {/* Step 1 — ประเภทการซ่อม */}
             {state.step === 1 && (
               <div>
-                <p className="text-text-secondary mb-3 text-[13px] font-medium">{t('typeLabel')}</p>
-                <div className="flex flex-wrap gap-2">
-                  {SERVICE_TYPES.map((type) => (
-                    <button
-                      key={type}
-                      type="button"
-                      onClick={() => actions.setServiceType(type)}
-                      className={cn(
-                        'rounded-full px-4 py-1.5 text-[13px] font-medium ring-1 transition',
-                        state.serviceType === type
-                          ? 'bg-text-primary ring-text-primary text-white'
-                          : 'text-text-secondary bg-black/[0.02] ring-black/[0.06] hover:bg-black/[0.04]',
-                      )}
-                    >
-                      {t(`types.${type}`)}
-                    </button>
-                  ))}
+                <p className="text-text-secondary mb-4 text-[13px] font-medium">{t('typeLabel')}</p>
+                <div className="grid grid-cols-4 gap-3">
+                  {SERVICE_TYPES.map((type) => {
+                    const Icon = SERVICE_ICON[type]
+                    const isActive = state.serviceType === type
+                    return (
+                      <button
+                        key={type}
+                        type="button"
+                        onClick={() => actions.setServiceType(type)}
+                        className={cn(
+                          'flex flex-col items-center justify-center gap-2.5 rounded-[16px] px-2 py-4 ring-1 transition',
+                          isActive
+                            ? 'bg-text-primary text-white ring-transparent'
+                            : 'text-text-secondary hover:text-text-primary bg-white/[0.6] ring-black/[0.06] hover:bg-black/[0.04] hover:ring-black/[0.1]',
+                        )}
+                      >
+                        <Icon className="size-5 shrink-0" />
+                        <span className="text-center text-[11px] leading-tight font-medium">
+                          {t(`types.${type}`)}
+                        </span>
+                      </button>
+                    )
+                  })}
                 </div>
               </div>
             )}
@@ -85,7 +118,7 @@ export function LogServiceClient({ id }: Props) {
             {/* Step 2 — วันที่ & เลขไมล์ */}
             {state.step === 2 && (
               <div className="flex flex-col gap-4">
-                <Field label={t('date')}>
+                <FormField label={t('date')}>
                   <Input
                     type="date"
                     value={state.date}
@@ -93,8 +126,8 @@ export function LogServiceClient({ id }: Props) {
                     required
                     className={inputClass}
                   />
-                </Field>
-                <Field label={t('mileage')}>
+                </FormField>
+                <FormField label={t('mileage')}>
                   <Input
                     type="number"
                     value={state.mileage}
@@ -104,14 +137,14 @@ export function LogServiceClient({ id }: Props) {
                     required
                     className={inputClass}
                   />
-                </Field>
+                </FormField>
               </div>
             )}
 
             {/* Step 3 — ค่าใช้จ่าย & ร้าน */}
             {state.step === 3 && (
               <div className="flex flex-col gap-4">
-                <Field label={t('cost')}>
+                <FormField label={t('cost')}>
                   <Input
                     type="number"
                     value={state.cost}
@@ -121,15 +154,15 @@ export function LogServiceClient({ id }: Props) {
                     required
                     className={inputClass}
                   />
-                </Field>
-                <Field label={t('shop')}>
+                </FormField>
+                <FormField label={t('shop')}>
                   <Input
                     value={state.shop}
                     onChange={(e) => actions.setShop(e.target.value)}
                     placeholder={t('shopPlaceholder')}
                     className={inputClass}
                   />
-                </Field>
+                </FormField>
               </div>
             )}
 
@@ -160,7 +193,7 @@ export function LogServiceClient({ id }: Props) {
                 </div>
 
                 {/* Notes */}
-                <Field label={t('notes')}>
+                <FormField label={t('notes')}>
                   <textarea
                     value={state.notes}
                     onChange={(e) => actions.setNotes(e.target.value)}
@@ -168,7 +201,7 @@ export function LogServiceClient({ id }: Props) {
                     rows={3}
                     className={cn(inputClass, 'h-auto resize-none py-3 leading-relaxed')}
                   />
-                </Field>
+                </FormField>
               </div>
             )}
 
@@ -177,15 +210,6 @@ export function LogServiceClient({ id }: Props) {
         </Stepper.Root>
       </form>
     </>
-  )
-}
-
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label className="text-text-primary text-[13px] font-medium">{label}</label>
-      {children}
-    </div>
   )
 }
 
