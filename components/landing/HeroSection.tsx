@@ -114,7 +114,7 @@ export async function HeroSection() {
         {/* Left — Copy */}
         <div className="flex w-full flex-col gap-5 md:max-w-[480px] md:shrink-0">
           <h1
-            className="leading-[1.05] font-bold tracking-tight text-balance text-[#1D1D1F]"
+            className="text-text-primary leading-[1.05] font-bold tracking-tight text-balance"
             style={{ fontSize: 'clamp(32px, 5vw, 56px)' }}
           >
             <span>{t('headline1')}</span>

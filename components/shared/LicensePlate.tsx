@@ -7,7 +7,7 @@ type LicensePlateProps = {
 
 export function LicensePlate({ value, className }: LicensePlateProps) {
   return (
-    <span className={cn('font-mono text-[12px] tracking-tight text-[#86868B]', className)}>
+    <span className={cn('text-text-secondary font-mono text-[12px] tracking-tight', className)}>
       {value}
     </span>
   )

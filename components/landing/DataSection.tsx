@@ -82,7 +82,7 @@ export async function DataSection() {
         {/* Left */}
         <div className="flex flex-1 flex-col gap-5">
           <div>
-            <h2 className="text-[26px] leading-tight font-semibold tracking-tight text-balance text-[#1D1D1F] sm:text-[30px] md:text-[34px]">
+            <h2 className="text-text-primary text-[26px] leading-tight font-semibold tracking-tight text-balance sm:text-[30px] md:text-[34px]">
               {t('title1')}
               <br />
               {t('title2')}
@@ -98,17 +98,17 @@ export async function DataSection() {
               return (
                 <Card
                   key={item.label}
-                  className="rounded-2xl border-0 bg-[#F5F5F7] shadow-none ring-0"
+                  className="bg-surface rounded-2xl border-0 shadow-none ring-0"
                 >
                   <CardContent className="flex items-center gap-3 p-3.5">
                     <div className="bg-green/10 flex size-9 items-center justify-center rounded-xl">
                       <Icon className="text-green size-4" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm font-semibold text-[#1D1D1F]">{item.label}</p>
+                      <p className="text-text-primary text-sm font-semibold">{item.label}</p>
                       <p className="text-xs text-zinc-400">{item.percent}</p>
                     </div>
-                    <span className="font-mono text-sm font-semibold text-[#1D1D1F]">
+                    <span className="text-text-primary font-mono text-sm font-semibold">
                       {item.amount}
                     </span>
                   </CardContent>

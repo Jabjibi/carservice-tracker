@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { cn } from '@/lib/utils'
+import { cn, baht } from '@/lib/utils'
 import { useCar } from '@/lib/hooks/use-car'
 import { useLogServiceForm, SERVICE_TYPES } from '@/lib/hooks/use-log-service-form'
 import { Stepper } from '@/components/shared/Stepper'
@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 
 const inputClass =
-  'h-11 rounded-[10px] border-black/[0.1] bg-white/[0.6] px-3 text-[14px] text-[#1D1D1F] placeholder:text-[#C7C7CC] focus-visible:border-black/[0.2] focus-visible:ring-0'
+  'h-11 rounded-[10px] border-black/[0.1] bg-white/[0.6] px-3 text-[14px] text-text-primary placeholder:text-text-disabled focus-visible:border-black/[0.2] focus-visible:ring-0'
 
 type Props = { id: string }
 
@@ -32,20 +32,18 @@ export function LogServiceClient({ id }: Props) {
 
   const stepLabels = [t('steps.type'), t('steps.datetime'), t('steps.cost'), t('steps.confirm')]
 
-  const baht = (n: string) => `฿${Number(n).toLocaleString('th-TH')}`
-
   return (
     <>
       <Link
         href={backHref}
-        className="mb-6 flex w-fit items-center gap-1 text-[13px] text-[#6E6E73] transition hover:text-[#1D1D1F]"
+        className="text-text-secondary hover:text-text-primary mb-6 flex w-fit items-center gap-1 text-[13px] transition"
       >
         <ChevronLeft className="size-4" />
         {car ? `${car.brand} ${car.model}` : t('back')}
       </Link>
 
       <header className="mb-6">
-        <h1 className="text-[28px] font-semibold tracking-tight text-[#1D1D1F]">{t('title')}</h1>
+        <h1 className="text-text-primary text-[28px] font-semibold tracking-tight">{t('title')}</h1>
       </header>
 
       <form onSubmit={handleSubmit}>
@@ -63,7 +61,7 @@ export function LogServiceClient({ id }: Props) {
             {/* Step 1 — ประเภทการซ่อม */}
             {state.step === 1 && (
               <div>
-                <p className="mb-3 text-[13px] font-medium text-[#6E6E73]">{t('typeLabel')}</p>
+                <p className="text-text-secondary mb-3 text-[13px] font-medium">{t('typeLabel')}</p>
                 <div className="flex flex-wrap gap-2">
                   {SERVICE_TYPES.map((type) => (
                     <button
@@ -73,8 +71,8 @@ export function LogServiceClient({ id }: Props) {
                       className={cn(
                         'rounded-full px-4 py-1.5 text-[13px] font-medium ring-1 transition',
                         state.serviceType === type
-                          ? 'bg-[#1D1D1F] text-white ring-[#1D1D1F]'
-                          : 'bg-black/[0.02] text-[#6E6E73] ring-black/[0.06] hover:bg-black/[0.04]',
+                          ? 'bg-text-primary ring-text-primary text-white'
+                          : 'text-text-secondary bg-black/[0.02] ring-black/[0.06] hover:bg-black/[0.04]',
                       )}
                     >
                       {t(`types.${type}`)}
@@ -140,7 +138,7 @@ export function LogServiceClient({ id }: Props) {
               <div className="flex flex-col gap-5">
                 {/* Summary */}
                 <div>
-                  <p className="mb-3 text-[13px] font-medium text-[#6E6E73]">{t('review')}</p>
+                  <p className="text-text-secondary mb-3 text-[13px] font-medium">{t('review')}</p>
                   <div className="rounded-[14px] bg-black/[0.02] ring-1 ring-black/[0.06]">
                     <SummaryRow label={t('reviewType')} value={t(`types.${state.serviceType}`)} />
                     <Separator className="bg-black/[0.05]" />
@@ -185,7 +183,7 @@ export function LogServiceClient({ id }: Props) {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[13px] font-medium text-[#1D1D1F]">{label}</label>
+      <label className="text-text-primary text-[13px] font-medium">{label}</label>
       {children}
     </div>
   )
@@ -194,8 +192,8 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between px-4 py-3">
-      <span className="text-[13px] text-[#6E6E73]">{label}</span>
-      <span className="text-[13px] font-medium text-[#1D1D1F]">{value}</span>
+      <span className="text-text-secondary text-[13px]">{label}</span>
+      <span className="text-text-primary text-[13px] font-medium">{value}</span>
     </div>
   )
 }

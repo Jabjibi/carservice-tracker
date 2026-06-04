@@ -72,8 +72,8 @@ function Indicator() {
                 className={cn(
                   'flex size-7 items-center justify-center rounded-full text-[12px] font-semibold ring-1 transition',
                   isCompleted || isActive
-                    ? 'bg-[#1D1D1F] text-white ring-[#1D1D1F]'
-                    : 'bg-white text-[#AEAEB2] ring-black/[0.12]',
+                    ? 'bg-text-primary ring-text-primary text-white'
+                    : 'text-text-muted bg-white ring-black/[0.12]',
                 )}
               >
                 {isCompleted ? <Check className="size-3.5" /> : step}
@@ -81,7 +81,11 @@ function Indicator() {
               <p
                 className={cn(
                   'max-w-[56px] text-center text-[11px] leading-tight font-medium transition',
-                  isActive ? 'text-[#1D1D1F]' : isCompleted ? 'text-[#6E6E73]' : 'text-[#AEAEB2]',
+                  isActive
+                    ? 'text-text-primary'
+                    : isCompleted
+                      ? 'text-text-secondary'
+                      : 'text-text-muted',
                 )}
               >
                 {labels[i]}
@@ -91,7 +95,7 @@ function Indicator() {
               <div
                 className={cn(
                   'mt-3.5 h-px flex-1 transition',
-                  isCompleted ? 'bg-[#1D1D1F]' : 'bg-black/[0.1]',
+                  isCompleted ? 'bg-text-primary' : 'bg-black/[0.1]',
                 )}
               />
             )}
@@ -124,7 +128,7 @@ function Nav({ submitLabel, backLabel, nextLabel }: NavProps) {
           type="button"
           variant="outline"
           onClick={back}
-          className="h-12 flex-1 rounded-[12px] border-black/[0.1] text-[15px] font-semibold text-[#1D1D1F] hover:bg-black/[0.03]"
+          className="text-text-primary h-12 flex-1 rounded-[12px] border-black/[0.1] text-[15px] font-semibold hover:bg-black/[0.03]"
         >
           {backLabel}
         </Button>
@@ -132,7 +136,7 @@ function Nav({ submitLabel, backLabel, nextLabel }: NavProps) {
       {isLastStep ? (
         <Button
           type="submit"
-          className="h-12 flex-1 rounded-[12px] bg-[#1D1D1F] text-[15px] font-semibold text-white hover:bg-[#1D1D1F]/90"
+          className="bg-text-primary hover:bg-text-primary/90 h-12 flex-1 rounded-[12px] text-[15px] font-semibold text-white"
         >
           {submitLabel}
         </Button>
@@ -141,7 +145,7 @@ function Nav({ submitLabel, backLabel, nextLabel }: NavProps) {
           type="button"
           onClick={next}
           disabled={!canAdvance}
-          className="h-12 flex-1 rounded-[12px] bg-[#1D1D1F] text-[15px] font-semibold text-white hover:bg-[#1D1D1F]/90 disabled:opacity-40"
+          className="bg-text-primary hover:bg-text-primary/90 h-12 flex-1 rounded-[12px] text-[15px] font-semibold text-white disabled:opacity-40"
         >
           {nextLabel}
         </Button>

@@ -27,19 +27,19 @@ export function TripsTab({
       {trips.length > 0 && (
         <div className="grid grid-cols-2 gap-3">
           <SectionCard className="p-4 text-center">
-            <p className="text-[11px] font-medium tracking-wide text-[#AEAEB2] uppercase">
+            <p className="text-text-muted text-[11px] font-medium tracking-wide uppercase">
               {totalDistanceLabel}
             </p>
-            <p className="mt-1 text-[20px] font-semibold text-[#1D1D1F]">
+            <p className="text-text-primary mt-1 text-[20px] font-semibold">
               {totalKm.toLocaleString('th-TH')}
-              <span className="ml-1 text-[13px] font-normal text-[#AEAEB2]">กม.</span>
+              <span className="text-text-muted ml-1 text-[13px] font-normal">กม.</span>
             </p>
           </SectionCard>
           <SectionCard className="p-4 text-center">
-            <p className="text-[11px] font-medium tracking-wide text-[#AEAEB2] uppercase">
+            <p className="text-text-muted text-[11px] font-medium tracking-wide uppercase">
               {tripCountLabel}
             </p>
-            <p className="mt-1 text-[20px] font-semibold text-[#1D1D1F]">{trips.length}</p>
+            <p className="text-text-primary mt-1 text-[20px] font-semibold">{trips.length}</p>
           </SectionCard>
         </div>
       )}
@@ -48,10 +48,10 @@ export function TripsTab({
         {trips.length === 0 ? (
           <div className="flex flex-col items-center py-10 text-center">
             <span className="flex size-12 items-center justify-center rounded-full bg-black/[0.04] ring-1 ring-black/[0.05]">
-              <MapPin className="size-5 text-[#AEAEB2]" />
+              <MapPin className="text-text-muted size-5" />
             </span>
-            <p className="mt-3 text-[14px] font-medium text-[#1D1D1F]">{emptyLabel}</p>
-            <p className="mt-1 text-[12px] text-[#6E6E73]">{emptyHint}</p>
+            <p className="text-text-primary mt-3 text-[14px] font-medium">{emptyLabel}</p>
+            <p className="text-text-secondary mt-1 text-[12px]">{emptyHint}</p>
           </div>
         ) : (
           <ol className="flex flex-col">
@@ -71,18 +71,18 @@ function TripTimelineItem({ trip, isLast }: TripTimelineItemProps) {
   return (
     <li className="flex gap-4">
       <div className="flex flex-col items-center">
-        <span className="mt-1 size-2.5 shrink-0 rounded-full bg-[#AEAEB2] ring-2 ring-white ring-offset-1" />
+        <span className="bg-text-muted mt-1 size-2.5 shrink-0 rounded-full ring-2 ring-white ring-offset-1" />
         {!isLast && <div className="mt-1 w-px flex-1 bg-black/[0.08]" />}
       </div>
       <div className={cn('flex-1 pb-6', isLast && 'pb-0')}>
-        <p className="text-[11px] font-medium tracking-wide text-[#AEAEB2] uppercase">
+        <p className="text-text-muted text-[11px] font-medium tracking-wide uppercase">
           {trip.date}
         </p>
-        <p className="mt-0.5 text-[14px] font-medium text-[#1D1D1F]">{trip.destination}</p>
-        <p className="mt-0.5 text-[12px] text-[#AEAEB2]">
+        <p className="text-text-primary mt-0.5 text-[14px] font-medium">{trip.destination}</p>
+        <p className="text-text-muted mt-0.5 text-[12px]">
           {trip.distanceKm.toLocaleString('th-TH')} กม.
         </p>
-        {trip.notes && <p className="mt-0.5 text-[12px] text-[#6E6E73]">{trip.notes}</p>}
+        {trip.notes && <p className="text-text-secondary mt-0.5 text-[12px]">{trip.notes}</p>}
       </div>
     </li>
   )

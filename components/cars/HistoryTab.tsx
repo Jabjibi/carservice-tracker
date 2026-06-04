@@ -19,10 +19,10 @@ export function HistoryTab({ logs, shopLabel, emptyLabel, emptyHint }: HistoryTa
       {logs.length === 0 ? (
         <div className="flex flex-col items-center py-10 text-center">
           <span className="flex size-12 items-center justify-center rounded-full bg-black/[0.04] ring-1 ring-black/[0.05]">
-            <Wrench className="size-5 text-[#AEAEB2]" />
+            <Wrench className="text-text-muted size-5" />
           </span>
-          <p className="mt-3 text-[14px] font-medium text-[#1D1D1F]">{emptyLabel}</p>
-          <p className="mt-1 text-[12px] text-[#6E6E73]">{emptyHint}</p>
+          <p className="text-text-primary mt-3 text-[14px] font-medium">{emptyLabel}</p>
+          <p className="text-text-secondary mt-1 text-[12px]">{emptyHint}</p>
         </div>
       ) : (
         <ol className="flex flex-col">
@@ -50,24 +50,26 @@ function ServiceTimelineItem({ log, isLast, shopLabel }: ServiceTimelineItemProp
   return (
     <li className="flex gap-4">
       <div className="flex flex-col items-center">
-        <span className="mt-1 size-2.5 shrink-0 rounded-full bg-[#1D1D1F] ring-2 ring-white ring-offset-1" />
+        <span className="bg-text-primary mt-1 size-2.5 shrink-0 rounded-full ring-2 ring-white ring-offset-1" />
         {!isLast && <div className="mt-1 w-px flex-1 bg-black/[0.08]" />}
       </div>
       <div className={cn('flex-1 pb-6', isLast && 'pb-0')}>
-        <p className="text-[11px] font-medium tracking-wide text-[#AEAEB2] uppercase">{log.date}</p>
-        <p className="mt-0.5 text-[14px] font-medium text-[#1D1D1F]">{log.type}</p>
+        <p className="text-text-muted text-[11px] font-medium tracking-wide uppercase">
+          {log.date}
+        </p>
+        <p className="text-text-primary mt-0.5 text-[14px] font-medium">{log.type}</p>
         <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5">
-          <span className="text-[13px] font-semibold text-[#1D1D1F]">{baht(log.cost)}</span>
-          <span className="text-[12px] text-[#AEAEB2]">
+          <span className="text-text-primary text-[13px] font-semibold">{baht(log.cost)}</span>
+          <span className="text-text-muted text-[12px]">
             {log.mileage.toLocaleString('th-TH')} กม.
           </span>
         </div>
         {log.shop && (
-          <p className="mt-1 text-[12px] text-[#6E6E73]">
+          <p className="text-text-secondary mt-1 text-[12px]">
             {shopLabel}: {log.shop}
           </p>
         )}
-        {log.notes && <p className="mt-1 text-[12px] text-[#6E6E73]">{log.notes}</p>}
+        {log.notes && <p className="text-text-secondary mt-1 text-[12px]">{log.notes}</p>}
       </div>
     </li>
   )

@@ -20,9 +20,9 @@ import { SettingsTab } from '@/components/cars/SettingsTab'
 import type { Car } from '@/lib/types'
 
 const STATUS_LABEL: Record<Car['nextService']['status'], string> = {
-  ok: 'text-[#6E6E73]',
-  warn: 'text-[#1D1D1F]',
-  danger: 'text-[#1D1D1F] font-semibold',
+  ok: 'text-text-secondary',
+  warn: 'text-text-primary',
+  danger: 'text-text-primary font-semibold',
 }
 
 export function CarDetailClient({ id }: { id: string }) {
@@ -34,8 +34,8 @@ export function CarDetailClient({ id }: { id: string }) {
   if (!car) {
     return (
       <div className="flex flex-col items-center justify-center py-32 text-center">
-        <p className="text-[15px] font-medium text-[#1D1D1F]">ไม่พบรถคันนี้</p>
-        <Link href="/mycar" className="mt-2 text-[13px] text-[#6E6E73] underline">
+        <p className="text-text-primary text-[15px] font-medium">ไม่พบรถคันนี้</p>
+        <Link href="/mycar" className="text-text-secondary mt-2 text-[13px] underline">
           {t('back')}
         </Link>
       </div>
@@ -46,7 +46,7 @@ export function CarDetailClient({ id }: { id: string }) {
     <>
       <Link
         href="/mycar"
-        className="mb-6 flex w-fit items-center gap-1 text-[13px] text-[#6E6E73] transition hover:text-[#1D1D1F]"
+        className="text-text-secondary hover:text-text-primary mb-6 flex w-fit items-center gap-1 text-[13px] transition"
       >
         <ChevronLeft className="size-4" />
         {t('back')}
@@ -60,22 +60,22 @@ export function CarDetailClient({ id }: { id: string }) {
           bare
         />
         <div>
-          <h1 className="text-[22px] font-semibold tracking-tight text-[#1D1D1F]">
+          <h1 className="text-text-primary text-[22px] font-semibold tracking-tight">
             {car.brand} {car.model}
           </h1>
           <div className="mt-1 flex items-center justify-center gap-2">
             <LicensePlate value={car.plate} />
-            <span className="text-[12px] text-[#AEAEB2]">·</span>
-            <span className="text-[12px] text-[#AEAEB2]">{car.year}</span>
+            <span className="text-text-muted text-[12px]">·</span>
+            <span className="text-text-muted text-[12px]">{car.year}</span>
             {car.color && (
               <>
-                <span className="text-[12px] text-[#AEAEB2]">·</span>
-                <span className="text-[12px] text-[#AEAEB2]">{car.color}</span>
+                <span className="text-text-muted text-[12px]">·</span>
+                <span className="text-text-muted text-[12px]">{car.color}</span>
               </>
             )}
           </div>
           {car.currentMileage !== undefined && (
-            <p className="mt-1 text-[13px] text-[#AEAEB2]">
+            <p className="text-text-muted mt-1 text-[13px]">
               {car.currentMileage.toLocaleString('th-TH')} {t('mileage')}
             </p>
           )}

@@ -16,32 +16,46 @@ export function MyCarsClient() {
     <>
       <header className="mb-8 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-[32px] font-semibold tracking-tight text-[#1D1D1F]">{t('title')}</h1>
-          <p className="mt-1 text-[14px] text-[#6E6E73]">
+          <h1 className="text-text-primary text-[32px] font-semibold tracking-tight">
+            {t('title')}
+          </h1>
+          <p className="text-text-secondary mt-1 text-[14px]">
             {cars.length > 0 ? t('subtitle', { count: cars.length }) : t('subtitleEmpty')}
           </p>
         </div>
-        <Button
-          asChild
-          className="mt-1 h-10 shrink-0 gap-2 rounded-[12px] bg-[#1D1D1F] px-4 text-[13px] font-semibold text-white hover:bg-[#1D1D1F]/90"
-        >
-          <Link href="/addcar">
-            <Plus className="size-4" />
-            {t('fab.addCar')}
-          </Link>
-        </Button>
+        <div className="mt-1 flex shrink-0 gap-2">
+          <Button
+            asChild
+            variant="outline"
+            className="text-text-secondary hover:text-text-primary h-10 gap-2 rounded-[12px] border-black/[0.1] px-4 text-[13px] font-semibold hover:bg-black/[0.03]"
+          >
+            <Link href="/repair">
+              <Wrench className="size-4" />
+              {t('fab.logService')}
+            </Link>
+          </Button>
+          <Button
+            asChild
+            className="bg-text-primary hover:bg-text-primary/90 h-10 gap-2 rounded-[12px] px-4 text-[13px] font-semibold text-white"
+          >
+            <Link href="/addcar">
+              <Plus className="size-4" />
+              {t('fab.addCar')}
+            </Link>
+          </Button>
+        </div>
       </header>
 
       {cars.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-[20px] bg-white/[0.6] py-20 ring-1 ring-black/[0.06] backdrop-blur-2xl">
           <span className="flex size-14 items-center justify-center rounded-full bg-black/[0.04] ring-1 ring-black/[0.05]">
-            <Car className="size-6 text-[#AEAEB2]" />
+            <Car className="text-text-muted size-6" />
           </span>
-          <p className="mt-4 text-[15px] font-medium text-[#1D1D1F]">{t('empty.title')}</p>
-          <p className="mt-1 text-[13px] text-[#6E6E73]">{t('empty.subtitle')}</p>
+          <p className="text-text-primary mt-4 text-[15px] font-medium">{t('empty.title')}</p>
+          <p className="text-text-secondary mt-1 text-[13px]">{t('empty.subtitle')}</p>
           <Button
             asChild
-            className="mt-6 h-10 gap-2 rounded-[12px] bg-[#1D1D1F] px-5 text-[13px] font-semibold text-white hover:bg-[#1D1D1F]/90"
+            className="bg-text-primary hover:bg-text-primary/90 mt-6 h-10 gap-2 rounded-[12px] px-5 text-[13px] font-semibold text-white"
           >
             <Link href="/addcar">
               <Plus className="size-4" />
@@ -52,7 +66,7 @@ export function MyCarsClient() {
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {cars.map((car) => (
-            <CarCard key={car.id} car={car} logServiceLabel={t('fab.logService')} />
+            <CarCard key={car.id} car={car} />
           ))}
         </div>
       )}

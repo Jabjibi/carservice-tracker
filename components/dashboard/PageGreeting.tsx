@@ -7,10 +7,10 @@ type PageGreetingProps = {
 export function PageGreeting({ name, date, subtitle }: PageGreetingProps) {
   return (
     <header className="mb-8">
-      <h1 className="text-[36px] font-semibold tracking-tight text-[#1D1D1F]">
+      <h1 className="text-text-primary text-[36px] font-semibold tracking-tight">
         สวัสดี, {name} <span aria-hidden>👋</span>
       </h1>
-      <p className="mt-2 text-[14px] text-[#6E6E73]">
+      <p className="text-text-secondary mt-2 text-[14px]">
         {date} — {subtitle}
       </p>
     </header>

@@ -13,6 +13,15 @@
   /* Brand green (LINE) */
   --color-green: #06c755;
   --color-green-hover: #05b04a;
+  /* Light palette — typography */
+  --color-text-primary: #1d1d1f;
+  --color-text-secondary: #6e6e73;
+  --color-text-muted: #aeaeb2;
+  --color-text-disabled: #c7c7cc;
+  /* Light palette — surfaces */
+  --color-surface: #f5f5f7;
+  --color-tile: #f0f0f2;
+  --color-elevated: #e8e8ec;
   /* Dark surfaces */
   --color-dark-void: #0a0a0a;
   --color-dark-surface: #111111;

@@ -50,7 +50,7 @@ function FabMenu({ children }: FabMenuProps) {
       align="end"
       side="top"
       sideOffset={12}
-      className="min-w-[220px] rounded-[16px] border-black/[0.06] bg-white/95 p-1.5 text-[#1D1D1F] shadow-2xl backdrop-blur-2xl"
+      className="text-text-primary min-w-[220px] rounded-[16px] border-black/[0.06] bg-white/95 p-1.5 shadow-2xl backdrop-blur-2xl"
     >
       {children}
     </DropdownMenuContent>
@@ -69,7 +69,7 @@ function FabItem({ icon, label, href, onSelect }: FabItemProps) {
     <DropdownMenuItem
       asChild={!!href}
       onSelect={onSelect}
-      className="cursor-pointer gap-3 rounded-[10px] px-3 py-2.5 text-[13px] font-medium text-[#1D1D1F] focus:bg-black/[0.05] focus:text-[#1D1D1F]"
+      className="text-text-primary focus:text-text-primary cursor-pointer gap-3 rounded-[10px] px-3 py-2.5 text-[13px] font-medium focus:bg-black/[0.05]"
     >
       {href ? (
         <a href={href} className="flex items-center gap-3">

@@ -67,7 +67,7 @@ export function AppSidebar() {
           <button
             onClick={toggleSidebar}
             aria-label="Toggle Sidebar"
-            className="flex size-8 shrink-0 items-center justify-center rounded-[12px] text-[#6E6E73] transition hover:bg-black/[0.04] hover:text-[#1D1D1F]"
+            className="text-text-secondary hover:text-text-primary flex size-8 shrink-0 items-center justify-center rounded-[12px] transition hover:bg-black/[0.04]"
           >
             <PanelLeft className="size-[18px]" />
           </button>
@@ -89,7 +89,7 @@ export function AppSidebar() {
                       asChild
                       isActive={isActive}
                       tooltip={label}
-                      className="h-10 rounded-[12px] px-3 text-[14px] font-medium text-[#6E6E73] transition group-data-[collapsible=icon]:h-10! group-data-[collapsible=icon]:w-full! group-data-[collapsible=icon]:justify-center! group-data-[collapsible=icon]:p-0! hover:bg-black/[0.04] hover:text-[#1D1D1F] data-[active=true]:bg-black/[0.05] data-[active=true]:text-[#1D1D1F] data-[active=true]:ring-1 data-[active=true]:ring-black/[0.06]"
+                      className="text-text-secondary hover:text-text-primary data-[active=true]:text-text-primary h-10 rounded-[12px] px-3 text-[14px] font-medium transition group-data-[collapsible=icon]:h-10! group-data-[collapsible=icon]:w-full! group-data-[collapsible=icon]:justify-center! group-data-[collapsible=icon]:p-0! hover:bg-black/[0.04] data-[active=true]:bg-black/[0.05] data-[active=true]:ring-1 data-[active=true]:ring-black/[0.06]"
                     >
                       <Link href={href}>
                         <Icon className="size-[18px] shrink-0" />

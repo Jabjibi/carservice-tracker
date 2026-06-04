@@ -7,9 +7,9 @@ type StatusDotProps = {
 }
 
 const STYLES: Record<ServiceStatus, string> = {
-  ok: 'bg-[#AEAEB2]',
-  warn: 'bg-[#6E6E73] ring-2 ring-black/[0.06]',
-  danger: 'bg-[#1D1D1F] ring-2 ring-black/[0.1]',
+  ok: 'bg-text-muted',
+  warn: 'bg-text-secondary ring-2 ring-black/[0.06]',
+  danger: 'bg-text-primary ring-2 ring-black/[0.1]',
 }
 
 export function StatusDot({ status, className }: StatusDotProps) {

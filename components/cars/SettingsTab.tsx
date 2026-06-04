@@ -23,10 +23,10 @@ export function SettingsTab({ t }: SettingsTabProps) {
             key={label}
             className="flex w-full items-center justify-between px-6 py-5 text-left transition hover:bg-black/[0.02]"
           >
-            <span className={danger ? 'text-[13px] text-red-500' : 'text-[13px] text-[#1D1D1F]'}>
+            <span className={danger ? 'text-[13px] text-red-500' : 'text-text-primary text-[13px]'}>
               {label}
             </span>
-            <ArrowRight className="size-4 shrink-0 text-[#C7C7CC]" />
+            <ArrowRight className="text-text-disabled size-4 shrink-0" />
           </button>
         ))}
       </div>

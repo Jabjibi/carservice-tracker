@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
 const inputClass =
-  'h-11 rounded-[10px] border-black/[0.1] bg-white/[0.6] px-3 text-[14px] text-[#1D1D1F] placeholder:text-[#C7C7CC] focus-visible:border-black/[0.2] focus-visible:ring-0'
+  'h-11 rounded-[10px] border-black/[0.1] bg-white/[0.6] px-3 text-[14px] text-text-primary placeholder:text-text-disabled focus-visible:border-black/[0.2] focus-visible:ring-0'
 
 export function AddCarClient() {
   const t = useTranslations('addCar')
@@ -28,20 +28,20 @@ export function AddCarClient() {
     <>
       <Link
         href="/mycar"
-        className="mb-6 flex w-fit items-center gap-1 text-[13px] text-[#6E6E73] transition hover:text-[#1D1D1F]"
+        className="text-text-secondary hover:text-text-primary mb-6 flex w-fit items-center gap-1 text-[13px] transition"
       >
         <ChevronLeft className="size-4" />
         {t('back')}
       </Link>
 
       <header className="mb-6">
-        <h1 className="text-[28px] font-semibold tracking-tight text-[#1D1D1F]">{t('title')}</h1>
+        <h1 className="text-text-primary text-[28px] font-semibold tracking-tight">{t('title')}</h1>
       </header>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {/* Car type selector */}
         <SectionCard>
-          <p className="mb-3 text-[13px] font-medium text-[#6E6E73]">{t('typeLabel')}</p>
+          <p className="text-text-secondary mb-3 text-[13px] font-medium">{t('typeLabel')}</p>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {CAR_TYPES.map((type) => (
               <button
@@ -51,7 +51,7 @@ export function AddCarClient() {
                 className={cn(
                   'flex flex-col items-center gap-2 rounded-[16px] p-3 ring-1 transition',
                   state.carType === type
-                    ? 'bg-[#1D1D1F] ring-[#1D1D1F]'
+                    ? 'bg-text-primary ring-text-primary'
                     : 'bg-black/[0.02] ring-black/[0.06] hover:bg-black/[0.04]',
                 )}
               >
@@ -61,7 +61,7 @@ export function AddCarClient() {
                 <span
                   className={cn(
                     'text-[12px] font-medium',
-                    state.carType === type ? 'text-white' : 'text-[#6E6E73]',
+                    state.carType === type ? 'text-white' : 'text-text-secondary',
                   )}
                 >
                   {t(`types.${type}`)}
@@ -140,7 +140,7 @@ export function AddCarClient() {
 
         <Button
           type="submit"
-          className="h-12 w-full rounded-[12px] bg-[#1D1D1F] text-[15px] font-semibold text-white hover:bg-[#1D1D1F]/90"
+          className="bg-text-primary hover:bg-text-primary/90 h-12 w-full rounded-[12px] text-[15px] font-semibold text-white"
         >
           {t('submit')}
         </Button>
@@ -152,7 +152,7 @@ export function AddCarClient() {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[13px] font-medium text-[#1D1D1F]">{label}</label>
+      <label className="text-text-primary text-[13px] font-medium">{label}</label>
       {children}
     </div>
   )

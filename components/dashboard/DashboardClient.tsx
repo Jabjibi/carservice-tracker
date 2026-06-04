@@ -9,12 +9,11 @@ import { useDashboardStats } from '@/lib/hooks/use-dashboard-stats'
 import { useExpenseChart } from '@/lib/hooks/use-expense-chart'
 import { useUpcomingServices } from '@/lib/hooks/use-upcoming-services'
 import { useRecentServices } from '@/lib/hooks/use-recent-services'
+import { baht } from '@/lib/utils'
 import { ExpenseBarChart } from './ExpenseBarChart'
 import { PageGreeting } from './PageGreeting'
 import { RecentServicesTable } from './RecentServicesTable'
 import { UpcomingServiceList } from './UpcomingServiceList'
-
-const baht = (n: number) => `฿${n.toLocaleString('th-TH')}`
 
 export function DashboardClient() {
   const t = useTranslations('dashboard')
@@ -65,10 +64,10 @@ export function DashboardClient() {
         <SectionCard className="xl:col-span-2">
           <header className="mb-6 flex items-start justify-between">
             <div>
-              <h2 className="text-[15px] font-semibold text-[#1D1D1F]">{t('chartTitle')}</h2>
-              <p className="mt-1 text-[12px] text-[#86868B]">{t('chartSubtitle')}</p>
+              <h2 className="text-text-primary text-[15px] font-semibold">{t('chartTitle')}</h2>
+              <p className="text-text-secondary mt-1 text-[12px]">{t('chartSubtitle')}</p>
             </div>
-            <span className="rounded-full bg-black/[0.04] px-2.5 py-1 text-[11px] font-medium text-[#6E6E73] ring-1 ring-black/[0.05]">
+            <span className="text-text-secondary rounded-full bg-black/[0.04] px-2.5 py-1 text-[11px] font-medium ring-1 ring-black/[0.05]">
               {t('chartRange')}
             </span>
           </header>

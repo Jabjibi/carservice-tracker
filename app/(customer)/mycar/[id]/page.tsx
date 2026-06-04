@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!car) return { title: 'Car not found' }
   return {
     title: `${car.brand} ${car.model}`,
-    description: `Service history for ${car.brand} ${car.model} (${car.plate})`,
+    description: `ประวัติการซ่อมบำรุง ${car.brand} ${car.model} (${car.plate})`,
   }
 }
 
