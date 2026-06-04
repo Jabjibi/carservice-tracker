@@ -141,7 +141,20 @@
     "shopPlaceholder": "เช่น ศูนย์ Honda สาขาลาดพร้าว",
     "notes": "หมายเหตุ (ไม่บังคับ)",
     "notesPlaceholder": "รายละเอียดเพิ่มเติม",
-    "submit": "บันทึกการซ่อม"
+    "submit": "บันทึกการซ่อม",
+    "next": "ถัดไป",
+    "review": "สรุปรายการ",
+    "reviewType": "ประเภทการซ่อม",
+    "reviewDate": "วันที่",
+    "reviewMileage": "เลขไมล์",
+    "reviewCost": "ค่าใช้จ่าย",
+    "reviewShop": "ร้าน / อู่",
+    "steps": {
+      "type": "ประเภท",
+      "datetime": "วันที่/ไมล์",
+      "cost": "ค่าใช้จ่าย",
+      "confirm": "ยืนยัน"
+    }
   },
   "carDetail": {
     "back": "รถของฉัน",

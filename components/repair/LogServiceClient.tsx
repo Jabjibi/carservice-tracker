@@ -1,26 +1,16 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { useCar } from '@/lib/hooks/use-car'
+import { useLogServiceForm, SERVICE_TYPES } from '@/lib/hooks/use-log-service-form'
+import { Stepper } from '@/components/shared/Stepper'
 import { SectionCard } from '@/components/shared/SectionCard'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-
-const SERVICE_TYPES = [
-  'oil',
-  'tire',
-  'filter',
-  'brake',
-  'electrical',
-  'inspection',
-  'other',
-] as const
-type ServiceTypeKey = (typeof SERVICE_TYPES)[number]
+import { Separator } from '@/components/ui/separator'
 
 const inputClass =
   'h-11 rounded-[10px] border-black/[0.1] bg-white/[0.6] px-3 text-[14px] text-[#1D1D1F] placeholder:text-[#C7C7CC] focus-visible:border-black/[0.2] focus-visible:ring-0'
@@ -31,21 +21,18 @@ export function LogServiceClient({ id }: Props) {
   const t = useTranslations('logService')
   const router = useRouter()
   const car = useCar(id)
-
-  const [serviceType, setServiceType] = useState<ServiceTypeKey>('oil')
-  const [date, setDate] = useState('')
-  const [mileage, setMileage] = useState('')
-  const [cost, setCost] = useState('')
-  const [shop, setShop] = useState('')
-  const [notes, setNotes] = useState('')
+  const { state, actions, meta } = useLogServiceForm()
 
   const backHref = id ? `/mycar/${id}` : '/mycar'
 
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault()
-    // mock — navigate back after submit
     router.push(backHref)
   }
+
+  const stepLabels = [t('steps.type'), t('steps.datetime'), t('steps.cost'), t('steps.confirm')]
+
+  const baht = (n: string) => `฿${Number(n).toLocaleString('th-TH')}`
 
   return (
     <>
@@ -61,93 +48,135 @@ export function LogServiceClient({ id }: Props) {
         <h1 className="text-[28px] font-semibold tracking-tight text-[#1D1D1F]">{t('title')}</h1>
       </header>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {/* Service type selector */}
-        <SectionCard>
-          <p className="mb-3 text-[13px] font-medium text-[#6E6E73]">{t('typeLabel')}</p>
-          <div className="flex flex-wrap gap-2">
-            {SERVICE_TYPES.map((type) => (
-              <button
-                key={type}
-                type="button"
-                onClick={() => setServiceType(type)}
-                className={cn(
-                  'rounded-full px-4 py-1.5 text-[13px] font-medium ring-1 transition',
-                  serviceType === type
-                    ? 'bg-[#1D1D1F] text-white ring-[#1D1D1F]'
-                    : 'bg-black/[0.02] text-[#6E6E73] ring-black/[0.06] hover:bg-black/[0.04]',
-                )}
-              >
-                {t(`types.${type}`)}
-              </button>
-            ))}
-          </div>
-        </SectionCard>
-
-        {/* Main fields */}
-        <SectionCard className="flex flex-col gap-4">
-          <Field label={t('date')}>
-            <Input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
-              className={inputClass}
-            />
-          </Field>
-          <div className="grid grid-cols-2 gap-4">
-            <Field label={t('mileage')}>
-              <Input
-                type="number"
-                value={mileage}
-                onChange={(e) => setMileage(e.target.value)}
-                placeholder={t('mileagePlaceholder')}
-                min={0}
-                required
-                className={inputClass}
-              />
-            </Field>
-            <Field label={t('cost')}>
-              <Input
-                type="number"
-                value={cost}
-                onChange={(e) => setCost(e.target.value)}
-                placeholder={t('costPlaceholder')}
-                min={0}
-                required
-                className={inputClass}
-              />
-            </Field>
-          </div>
-        </SectionCard>
-
-        {/* Optional fields */}
-        <SectionCard className="flex flex-col gap-4">
-          <Field label={t('shop')}>
-            <Input
-              value={shop}
-              onChange={(e) => setShop(e.target.value)}
-              placeholder={t('shopPlaceholder')}
-              className={inputClass}
-            />
-          </Field>
-          <Field label={t('notes')}>
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder={t('notesPlaceholder')}
-              rows={3}
-              className={cn(inputClass, 'h-auto resize-none py-3 leading-relaxed')}
-            />
-          </Field>
-        </SectionCard>
-
-        <Button
-          type="submit"
-          className="h-12 w-full rounded-[12px] bg-[#1D1D1F] text-[15px] font-semibold text-white hover:bg-[#1D1D1F]/90"
+      <form onSubmit={handleSubmit}>
+        <Stepper.Root
+          currentStep={state.step}
+          totalSteps={meta.totalSteps}
+          labels={stepLabels}
+          canAdvance={meta.canAdvance}
+          onNext={actions.next}
+          onBack={actions.back}
         >
-          {t('submit')}
-        </Button>
+          <SectionCard className="flex flex-col">
+            <Stepper.Indicator />
+
+            {/* Step 1 — ประเภทการซ่อม */}
+            {state.step === 1 && (
+              <div>
+                <p className="mb-3 text-[13px] font-medium text-[#6E6E73]">{t('typeLabel')}</p>
+                <div className="flex flex-wrap gap-2">
+                  {SERVICE_TYPES.map((type) => (
+                    <button
+                      key={type}
+                      type="button"
+                      onClick={() => actions.setServiceType(type)}
+                      className={cn(
+                        'rounded-full px-4 py-1.5 text-[13px] font-medium ring-1 transition',
+                        state.serviceType === type
+                          ? 'bg-[#1D1D1F] text-white ring-[#1D1D1F]'
+                          : 'bg-black/[0.02] text-[#6E6E73] ring-black/[0.06] hover:bg-black/[0.04]',
+                      )}
+                    >
+                      {t(`types.${type}`)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Step 2 — วันที่ & เลขไมล์ */}
+            {state.step === 2 && (
+              <div className="flex flex-col gap-4">
+                <Field label={t('date')}>
+                  <Input
+                    type="date"
+                    value={state.date}
+                    onChange={(e) => actions.setDate(e.target.value)}
+                    required
+                    className={inputClass}
+                  />
+                </Field>
+                <Field label={t('mileage')}>
+                  <Input
+                    type="number"
+                    value={state.mileage}
+                    onChange={(e) => actions.setMileage(e.target.value)}
+                    placeholder={t('mileagePlaceholder')}
+                    min={0}
+                    required
+                    className={inputClass}
+                  />
+                </Field>
+              </div>
+            )}
+
+            {/* Step 3 — ค่าใช้จ่าย & ร้าน */}
+            {state.step === 3 && (
+              <div className="flex flex-col gap-4">
+                <Field label={t('cost')}>
+                  <Input
+                    type="number"
+                    value={state.cost}
+                    onChange={(e) => actions.setCost(e.target.value)}
+                    placeholder={t('costPlaceholder')}
+                    min={0}
+                    required
+                    className={inputClass}
+                  />
+                </Field>
+                <Field label={t('shop')}>
+                  <Input
+                    value={state.shop}
+                    onChange={(e) => actions.setShop(e.target.value)}
+                    placeholder={t('shopPlaceholder')}
+                    className={inputClass}
+                  />
+                </Field>
+              </div>
+            )}
+
+            {/* Step 4 — หมายเหตุ + ยืนยัน */}
+            {state.step === 4 && (
+              <div className="flex flex-col gap-5">
+                {/* Summary */}
+                <div>
+                  <p className="mb-3 text-[13px] font-medium text-[#6E6E73]">{t('review')}</p>
+                  <div className="rounded-[14px] bg-black/[0.02] ring-1 ring-black/[0.06]">
+                    <SummaryRow label={t('reviewType')} value={t(`types.${state.serviceType}`)} />
+                    <Separator className="bg-black/[0.05]" />
+                    <SummaryRow label={t('reviewDate')} value={state.date} />
+                    <Separator className="bg-black/[0.05]" />
+                    <SummaryRow
+                      label={t('reviewMileage')}
+                      value={`${Number(state.mileage).toLocaleString('th-TH')} กม.`}
+                    />
+                    <Separator className="bg-black/[0.05]" />
+                    <SummaryRow label={t('reviewCost')} value={baht(state.cost)} />
+                    {state.shop && (
+                      <>
+                        <Separator className="bg-black/[0.05]" />
+                        <SummaryRow label={t('reviewShop')} value={state.shop} />
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Notes */}
+                <Field label={t('notes')}>
+                  <textarea
+                    value={state.notes}
+                    onChange={(e) => actions.setNotes(e.target.value)}
+                    placeholder={t('notesPlaceholder')}
+                    rows={3}
+                    className={cn(inputClass, 'h-auto resize-none py-3 leading-relaxed')}
+                  />
+                </Field>
+              </div>
+            )}
+
+            <Stepper.Nav submitLabel={t('submit')} backLabel={t('back')} nextLabel={t('next')} />
+          </SectionCard>
+        </Stepper.Root>
       </form>
     </>
   )
@@ -158,6 +187,15 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
     <div className="flex flex-col gap-1.5">
       <label className="text-[13px] font-medium text-[#1D1D1F]">{label}</label>
       {children}
+    </div>
+  )
+}
+
+function SummaryRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-center justify-between px-4 py-3">
+      <span className="text-[13px] text-[#6E6E73]">{label}</span>
+      <span className="text-[13px] font-medium text-[#1D1D1F]">{value}</span>
     </div>
   )
 }

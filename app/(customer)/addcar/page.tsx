@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { AddCarClient } from '@/components/add-car/AddCarClient'
 
 export const metadata: Metadata = {
-  title: 'Add New Car',
-  description: 'Register a new vehicle to start tracking service history',
+  title: 'เพิ่มรถใหม่',
+  description: 'ลงทะเบียนรถเพื่อเริ่มติดตามประวัติการซ่อมบำรุง',
 }
 
 export default function AddCarPage() {

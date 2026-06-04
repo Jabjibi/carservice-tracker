@@ -141,7 +141,20 @@
     "shopPlaceholder": "e.g. Honda Service Center",
     "notes": "Notes (optional)",
     "notesPlaceholder": "Additional details",
-    "submit": "Save service"
+    "submit": "Save service",
+    "next": "Next",
+    "review": "Summary",
+    "reviewType": "Service type",
+    "reviewDate": "Date",
+    "reviewMileage": "Mileage",
+    "reviewCost": "Cost",
+    "reviewShop": "Shop / Garage",
+    "steps": {
+      "type": "Type",
+      "datetime": "Date & km",
+      "cost": "Cost",
+      "confirm": "Confirm"
+    }
   },
   "carDetail": {
     "back": "My Cars",

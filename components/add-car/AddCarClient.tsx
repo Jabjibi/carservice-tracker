@@ -1,18 +1,15 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
+import { useAddCarForm, CAR_TYPES } from '@/lib/hooks/use-add-car-form'
 import { CarThumbnail } from '@/components/shared/CarThumbnail'
 import { SectionCard } from '@/components/shared/SectionCard'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import type { CarType } from '@/lib/types'
-
-const CAR_TYPES: CarType[] = ['sedan', 'pickup', 'van', 'motorcycle']
 
 const inputClass =
   'h-11 rounded-[10px] border-black/[0.1] bg-white/[0.6] px-3 text-[14px] text-[#1D1D1F] placeholder:text-[#C7C7CC] focus-visible:border-black/[0.2] focus-visible:ring-0'
@@ -20,18 +17,10 @@ const inputClass =
 export function AddCarClient() {
   const t = useTranslations('addCar')
   const router = useRouter()
-
-  const [carType, setCarType] = useState<CarType>('sedan')
-  const [brand, setBrand] = useState('')
-  const [model, setModel] = useState('')
-  const [year, setYear] = useState('')
-  const [plate, setPlate] = useState('')
-  const [color, setColor] = useState('')
-  const [mileage, setMileage] = useState('')
+  const { state, actions } = useAddCarForm()
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    // mock — navigate back after submit
     router.push('/mycar')
   }
 
@@ -58,10 +47,10 @@ export function AddCarClient() {
               <button
                 key={type}
                 type="button"
-                onClick={() => setCarType(type)}
+                onClick={() => actions.setCarType(type)}
                 className={cn(
                   'flex flex-col items-center gap-2 rounded-[16px] p-3 ring-1 transition',
-                  carType === type
+                  state.carType === type
                     ? 'bg-[#1D1D1F] ring-[#1D1D1F]'
                     : 'bg-black/[0.02] ring-black/[0.06] hover:bg-black/[0.04]',
                 )}
@@ -72,7 +61,7 @@ export function AddCarClient() {
                 <span
                   className={cn(
                     'text-[12px] font-medium',
-                    carType === type ? 'text-white' : 'text-[#6E6E73]',
+                    state.carType === type ? 'text-white' : 'text-[#6E6E73]',
                   )}
                 >
                   {t(`types.${type}`)}
@@ -86,8 +75,8 @@ export function AddCarClient() {
         <SectionCard className="flex flex-col gap-4">
           <Field label={t('brand')}>
             <Input
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
+              value={state.brand}
+              onChange={(e) => actions.setBrand(e.target.value)}
               placeholder={t('brandPlaceholder')}
               required
               className={inputClass}
@@ -95,8 +84,8 @@ export function AddCarClient() {
           </Field>
           <Field label={t('model')}>
             <Input
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
+              value={state.model}
+              onChange={(e) => actions.setModel(e.target.value)}
               placeholder={t('modelPlaceholder')}
               required
               className={inputClass}
@@ -106,8 +95,8 @@ export function AddCarClient() {
             <Field label={t('year')}>
               <Input
                 type="number"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
+                value={state.year}
+                onChange={(e) => actions.setYear(e.target.value)}
                 placeholder={t('yearPlaceholder')}
                 min={1900}
                 max={2099}
@@ -117,8 +106,8 @@ export function AddCarClient() {
             </Field>
             <Field label={t('plate')}>
               <Input
-                value={plate}
-                onChange={(e) => setPlate(e.target.value)}
+                value={state.plate}
+                onChange={(e) => actions.setPlate(e.target.value)}
                 placeholder={t('platePlaceholder')}
                 required
                 className={cn(inputClass, 'font-mono tracking-tight')}
@@ -131,8 +120,8 @@ export function AddCarClient() {
         <SectionCard className="flex flex-col gap-4">
           <Field label={t('color')}>
             <Input
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
+              value={state.color}
+              onChange={(e) => actions.setColor(e.target.value)}
               placeholder={t('colorPlaceholder')}
               className={inputClass}
             />
@@ -140,8 +129,8 @@ export function AddCarClient() {
           <Field label={t('mileage')}>
             <Input
               type="number"
-              value={mileage}
-              onChange={(e) => setMileage(e.target.value)}
+              value={state.mileage}
+              onChange={(e) => actions.setMileage(e.target.value)}
               placeholder={t('mileagePlaceholder')}
               min={0}
               className={inputClass}
