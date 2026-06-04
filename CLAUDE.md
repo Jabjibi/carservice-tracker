@@ -183,7 +183,11 @@ export const metadata: Metadata = {
 - **Dynamic** (`export async function generateMetadata`) — title มาจาก route params
 
 ```tsx
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
   const { id } = await params
   const car = cars.find((c) => c.id === id)
   return { title: `${car?.brand} ${car?.model}` }
