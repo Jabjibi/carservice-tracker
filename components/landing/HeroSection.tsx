@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Play, Car, Bell } from 'lucide-react'
-import { getTranslations, getLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { LandingContainer } from '@/components/shared/LandingContainer'
@@ -101,7 +101,6 @@ async function SocialProof() {
 
 export async function HeroSection() {
   const t = await getTranslations('hero')
-  const locale = await getLocale()
 
   return (
     <section
@@ -133,7 +132,7 @@ export async function HeroSection() {
               asChild
               className="bg-green hover:bg-green-hover h-12 gap-2 rounded-xl px-6 text-sm font-semibold text-white"
             >
-              <Link href={`/${locale}/login`}>
+              <Link href="/login">
                 <LineIcon className="size-4" />
                 {t('ctaPrimary')}
               </Link>
