@@ -1,0 +1,39 @@
+{
+  "logService": {
+    "title": "บันทึกการซ่อม",
+    "back": "กลับ",
+    "typeLabel": "ประเภทการซ่อม",
+    "types": {
+      "oil": "น้ำมันเครื่อง",
+      "tire": "ยาง",
+      "filter": "ไส้กรอง",
+      "brake": "เบรค",
+      "electrical": "ระบบไฟ",
+      "inspection": "ตรวจสภาพ",
+      "other": "อื่นๆ"
+    },
+    "date": "วันที่",
+    "mileage": "เลขไมล์ ณ วันที่ซ่อม",
+    "mileagePlaceholder": "เช่น 48500",
+    "cost": "ค่าใช้จ่าย (฿)",
+    "costPlaceholder": "เช่น 850",
+    "shop": "ร้าน / อู่ (ไม่บังคับ)",
+    "shopPlaceholder": "เช่น ศูนย์ Honda สาขาลาดพร้าว",
+    "notes": "หมายเหตุ (ไม่บังคับ)",
+    "notesPlaceholder": "รายละเอียดเพิ่มเติม",
+    "submit": "บันทึกการซ่อม",
+    "next": "ถัดไป",
+    "review": "สรุปรายการ",
+    "reviewType": "ประเภทการซ่อม",
+    "reviewDate": "วันที่",
+    "reviewMileage": "เลขไมล์",
+    "reviewCost": "ค่าใช้จ่าย",
+    "reviewShop": "ร้าน / อู่",
+    "steps": {
+      "type": "ประเภท",
+      "datetime": "วันที่/ไมล์",
+      "cost": "ค่าใช้จ่าย",
+      "confirm": "ยืนยัน"
+    }
+  }
+}

@@ -13,43 +13,6 @@
       "logService": "Log service"
     }
   },
-  "logService": {
-    "title": "Log Service",
-    "back": "Back",
-    "typeLabel": "Service type",
-    "types": {
-      "oil": "Engine oil",
-      "tire": "Tires",
-      "filter": "Air filter",
-      "brake": "Brakes",
-      "electrical": "Electrical",
-      "inspection": "Inspection",
-      "other": "Other"
-    },
-    "date": "Date",
-    "mileage": "Mileage at service",
-    "mileagePlaceholder": "e.g. 48500",
-    "cost": "Cost (฿)",
-    "costPlaceholder": "e.g. 850",
-    "shop": "Shop / Garage (optional)",
-    "shopPlaceholder": "e.g. Honda Service Center",
-    "notes": "Notes (optional)",
-    "notesPlaceholder": "Additional details",
-    "submit": "Save service",
-    "next": "Next",
-    "review": "Summary",
-    "reviewType": "Service type",
-    "reviewDate": "Date",
-    "reviewMileage": "Mileage",
-    "reviewCost": "Cost",
-    "reviewShop": "Shop / Garage",
-    "steps": {
-      "type": "Type",
-      "datetime": "Date & km",
-      "cost": "Cost",
-      "confirm": "Confirm"
-    }
-  },
   "carDetail": {
     "back": "My Cars",
     "mileage": "km",
