@@ -22,10 +22,5 @@
       "logService": "บันทึกการซ่อม",
       "addCar": "เพิ่มรถใหม่"
     }
-  },
-  "sidebar": {
-    "dashboard": "แดชบอร์ด",
-    "cars": "รถของฉัน",
-    "notifications": "การแจ้งเตือน"
   }
 }
