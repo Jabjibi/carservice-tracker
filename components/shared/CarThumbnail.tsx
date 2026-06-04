@@ -14,13 +14,27 @@ type CarThumbnailProps = {
   alt?: string
   className?: string
   bare?: boolean
+  priority?: boolean
 }
 
-export function CarThumbnail({ type, alt = '', className, bare = false }: CarThumbnailProps) {
+export function CarThumbnail({
+  type,
+  alt = '',
+  className,
+  bare = false,
+  priority = false,
+}: CarThumbnailProps) {
   if (bare) {
     return (
       <div className={cn('relative', className)}>
-        <Image src={SRC[type]} alt={alt} fill sizes="128px" className="object-contain" />
+        <Image
+          src={SRC[type]}
+          alt={alt}
+          fill
+          sizes="128px"
+          className="object-contain"
+          priority={priority}
+        />
       </div>
     )
   }
@@ -32,7 +46,14 @@ export function CarThumbnail({ type, alt = '', className, bare = false }: CarThu
         className,
       )}
     >
-      <Image src={SRC[type]} alt={alt} fill sizes="48px" className="object-contain p-1.5" />
+      <Image
+        src={SRC[type]}
+        alt={alt}
+        fill
+        sizes="48px"
+        className="object-contain p-1.5"
+        priority={priority}
+      />
     </div>
   )
 }

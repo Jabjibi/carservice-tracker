@@ -65,8 +65,8 @@ export function MyCarsClient() {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {cars.map((car) => (
-            <CarCard key={car.id} car={car} />
+          {cars.map((car, i) => (
+            <CarCard key={car.id} car={car} priority={i === 0} />
           ))}
         </div>
       )}

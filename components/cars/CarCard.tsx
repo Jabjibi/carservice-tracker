@@ -8,6 +8,7 @@ import type { Car } from '@/lib/types'
 
 type CarCardProps = {
   car: Car
+  priority?: boolean
 }
 
 const STATUS_LABEL: Record<Car['nextService']['status'], string> = {
@@ -16,7 +17,7 @@ const STATUS_LABEL: Record<Car['nextService']['status'], string> = {
   danger: 'text-text-primary font-semibold',
 }
 
-export function CarCard({ car }: CarCardProps) {
+export function CarCard({ car, priority = false }: CarCardProps) {
   return (
     <Link
       href={`/mycar/${car.id}`}
@@ -32,6 +33,7 @@ export function CarCard({ car }: CarCardProps) {
           alt={`${car.brand} ${car.model}`}
           className="h-24 w-full"
           bare
+          priority={priority}
         />
         <ChevronRight className="text-text-disabled group-hover:text-text-secondary absolute top-0 right-0 size-4 shrink-0 transition" />
       </div>

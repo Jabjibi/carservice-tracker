@@ -58,6 +58,7 @@ export function CarDetailClient({ id }: { id: string }) {
           alt={`${car.brand} ${car.model}`}
           className="h-36 w-full max-w-xs"
           bare
+          priority
         />
         <div>
           <h1 className="text-text-primary text-[22px] font-semibold tracking-tight">
