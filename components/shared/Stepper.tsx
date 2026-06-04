@@ -1,14 +1,14 @@
 'use client'
 
 import { Fragment, createContext, use } from 'react'
-import { Check } from 'lucide-react'
+import { Check, type LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
 type StepperContextValue = {
   state: { currentStep: number; totalSteps: number }
   actions: { next: () => void; back: () => void }
-  meta: { canAdvance: boolean; labels: string[] }
+  meta: { canAdvance: boolean; labels: string[]; icons?: readonly LucideIcon[] }
 }
 
 const StepperContext = createContext<StepperContextValue | null>(null)
@@ -23,6 +23,7 @@ type RootProps = {
   currentStep: number
   totalSteps: number
   labels: string[]
+  icons?: readonly LucideIcon[]
   canAdvance: boolean
   onNext: () => void
   onBack: () => void
@@ -33,6 +34,7 @@ function Root({
   currentStep,
   totalSteps,
   labels,
+  icons,
   canAdvance,
   onNext,
   onBack,
@@ -43,7 +45,7 @@ function Root({
       value={{
         state: { currentStep, totalSteps },
         actions: { next: onNext, back: onBack },
-        meta: { canAdvance, labels },
+        meta: { canAdvance, labels, icons },
       }}
     >
       {children}
@@ -54,7 +56,7 @@ function Root({
 function Indicator() {
   const {
     state: { currentStep, totalSteps },
-    meta: { labels },
+    meta: { labels, icons },
   } = useStepperContext()
 
   return (
@@ -64,28 +66,33 @@ function Indicator() {
         const isCompleted = step < currentStep
         const isActive = step === currentStep
         const isLast = step === totalSteps
+        const Icon = icons?.[i]
 
         return (
           <Fragment key={step}>
-            <div className="flex min-w-0 shrink-0 flex-col items-center gap-1.5">
+            <div className="flex shrink-0 flex-col items-center gap-2">
               <div
                 className={cn(
-                  'flex size-7 items-center justify-center rounded-full text-[12px] font-semibold ring-1 transition',
-                  isCompleted || isActive
-                    ? 'bg-text-primary ring-text-primary text-white'
-                    : 'text-text-muted bg-white ring-black/[0.12]',
+                  'flex size-10 items-center justify-center rounded-full transition',
+                  isCompleted
+                    ? 'bg-green text-white'
+                    : isActive
+                      ? 'bg-text-primary text-white ring-4 ring-black/[0.06]'
+                      : 'text-text-disabled bg-white/[0.6] ring-1 ring-black/[0.1]',
                 )}
               >
-                {isCompleted ? <Check className="size-3.5" /> : step}
+                {isCompleted ? (
+                  <Check className="size-4" />
+                ) : Icon ? (
+                  <Icon className="size-4" />
+                ) : (
+                  <span className="text-[12px] font-semibold">{step}</span>
+                )}
               </div>
               <p
                 className={cn(
                   'max-w-[56px] text-center text-[11px] leading-tight font-medium transition',
-                  isActive
-                    ? 'text-text-primary'
-                    : isCompleted
-                      ? 'text-text-secondary'
-                      : 'text-text-muted',
+                  isActive ? 'text-text-primary' : isCompleted ? 'text-green' : 'text-text-muted',
                 )}
               >
                 {labels[i]}
@@ -94,8 +101,8 @@ function Indicator() {
             {!isLast && (
               <div
                 className={cn(
-                  'mt-3.5 h-px flex-1 transition',
-                  isCompleted ? 'bg-text-primary' : 'bg-black/[0.1]',
+                  'mt-5 h-px flex-1 transition',
+                  isCompleted ? 'bg-green' : 'bg-black/[0.1]',
                 )}
               />
             )}

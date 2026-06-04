@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export const SERVICE_TYPES = [
   'oil',
@@ -14,7 +15,8 @@ export type ServiceTypeKey = (typeof SERVICE_TYPES)[number]
 
 export const TOTAL_STEPS = 4
 
-export function useLogServiceForm() {
+export function useLogServiceForm(id: string) {
+  const router = useRouter()
   const [step, setStep] = useState(1)
   const [serviceType, setServiceType] = useState<ServiceTypeKey>('oil')
   const [date, setDate] = useState('')
@@ -22,6 +24,8 @@ export function useLogServiceForm() {
   const [cost, setCost] = useState('')
   const [shop, setShop] = useState('')
   const [notes, setNotes] = useState('')
+
+  const backHref = id ? `/mycar/${id}` : '/mycar'
 
   function canAdvance(): boolean {
     if (step === 1) return true
@@ -38,9 +42,23 @@ export function useLogServiceForm() {
     if (step > 1) setStep((s) => s - 1)
   }
 
+  function submit() {
+    router.push(backHref)
+  }
+
   return {
     state: { step, serviceType, date, mileage, cost, shop, notes },
-    actions: { setServiceType, setDate, setMileage, setCost, setShop, setNotes, next, back },
-    meta: { totalSteps: TOTAL_STEPS, canAdvance: canAdvance() },
+    actions: {
+      setServiceType,
+      setDate,
+      setMileage,
+      setCost,
+      setShop,
+      setNotes,
+      next,
+      back,
+      submit,
+    },
+    meta: { totalSteps: TOTAL_STEPS, canAdvance: canAdvance(), backHref },
   }
 }
