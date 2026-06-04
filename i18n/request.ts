@@ -9,12 +9,13 @@ export default getRequestConfig(async () => {
   const raw = cookieStore.get('NEXT_LOCALE')?.value
   const locale: Locale = SUPPORTED_LOCALES.includes(raw as Locale) ? (raw as Locale) : 'th'
 
-  const [landingpage, dashboard, mycar, addCar, repair] = await Promise.all([
+  const [landingpage, dashboard, mycar, addCar, repair, carDetail] = await Promise.all([
     import(`../messages/landingpage/${locale}.json`),
     import(`../messages/dashboard/${locale}.json`),
     import(`../messages/mycar/${locale}.json`),
     import(`../messages/add-car/${locale}.json`),
     import(`../messages/repair/${locale}.json`),
+    import(`../messages/car-detail/${locale}.json`),
   ])
 
   return {
@@ -25,6 +26,7 @@ export default getRequestConfig(async () => {
       ...mycar.default,
       ...addCar.default,
       ...repair.default,
+      ...carDetail.default,
     },
   }
 })

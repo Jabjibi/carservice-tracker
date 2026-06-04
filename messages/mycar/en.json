@@ -12,45 +12,5 @@
       "addCar": "Add new car",
       "logService": "Log service"
     }
-  },
-  "carDetail": {
-    "back": "My Cars",
-    "mileage": "km",
-    "tabs": {
-      "history": "History",
-      "trips": "Trips",
-      "stats": "Stats",
-      "settings": "Settings"
-    },
-    "history": {
-      "title": "Service History",
-      "empty": "No service records yet",
-      "emptyHint": "Log your first service to start tracking",
-      "shop": "Shop"
-    },
-    "trips": {
-      "title": "Trips",
-      "totalDistance": "Total distance",
-      "tripCount": "trips",
-      "empty": "No trips yet",
-      "emptyHint": "Log a trip to start tracking mileage"
-    },
-    "stats": {
-      "title": "Statistics",
-      "totalExpense": "Total expense",
-      "avgPerService": "Avg. per service",
-      "serviceCount": "Total services",
-      "topCategories": "Top categories"
-    },
-    "settings": {
-      "editCar": "Edit car info",
-      "notifications": "Notification settings",
-      "deleteCar": "Remove car from system"
-    },
-    "fab": {
-      "trigger": "Add",
-      "logService": "Log service",
-      "logTrip": "Log trip"
-    }
   }
 }

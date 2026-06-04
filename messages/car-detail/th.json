@@ -1,0 +1,42 @@
+{
+  "carDetail": {
+    "back": "รถของฉัน",
+    "mileage": "กม.",
+    "tabs": {
+      "history": "ประวัติ",
+      "trips": "ออกทริป",
+      "stats": "สถิติ",
+      "settings": "ตั้งค่า"
+    },
+    "history": {
+      "title": "ประวัติซ่อมบำรุง",
+      "empty": "ยังไม่มีประวัติการซ่อม",
+      "emptyHint": "บันทึกการซ่อมครั้งแรกเพื่อเริ่มติดตาม",
+      "shop": "ร้าน"
+    },
+    "trips": {
+      "title": "ออกทริป",
+      "totalDistance": "ระยะทางรวม",
+      "tripCount": "ทริป",
+      "empty": "ยังไม่มีทริป",
+      "emptyHint": "บันทึกทริปเพื่อติดตามระยะทาง"
+    },
+    "stats": {
+      "title": "สถิติ",
+      "totalExpense": "ค่าใช้จ่ายรวม",
+      "avgPerService": "เฉลี่ยต่อครั้ง",
+      "serviceCount": "จำนวนครั้ง",
+      "topCategories": "หมวดที่ใช้มากสุด"
+    },
+    "settings": {
+      "editCar": "แก้ไขข้อมูลรถ",
+      "notifications": "ตั้งค่าการแจ้งเตือน",
+      "deleteCar": "ลบรถออกจากระบบ"
+    },
+    "fab": {
+      "trigger": "เพิ่ม",
+      "logService": "บันทึกการซ่อม",
+      "logTrip": "บันทึกทริป"
+    }
+  }
+}
