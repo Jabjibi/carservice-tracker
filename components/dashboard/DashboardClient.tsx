@@ -5,9 +5,8 @@ import { useTranslations } from 'next-intl'
 import { Fab } from '@/components/shared/Fab'
 import { SectionCard } from '@/components/shared/SectionCard'
 import { StatCard } from '@/components/shared/StatCard'
-import { useDashboardStats } from '@/lib/hooks/dashboard/use-dashboard-stats'
+import { useDashboard } from '@/lib/hooks/dashboard/use-dashboard'
 import { useExpenseChart } from '@/lib/hooks/dashboard/use-expense-chart'
-import { useUpcomingServices } from '@/lib/hooks/dashboard/use-upcoming-services'
 import { useRecentServices } from '@/lib/hooks/dashboard/use-recent-services'
 import { baht } from '@/lib/utils'
 import { ExpenseBarChart } from './ExpenseBarChart'
@@ -17,10 +16,9 @@ import { UpcomingServiceList } from './UpcomingServiceList'
 
 export function DashboardClient() {
   const t = useTranslations('dashboard')
-  const stats = useDashboardStats()
+  const { stats, upcoming, selectedId, select } = useDashboard()
   const chart = useExpenseChart()
   const recent = useRecentServices()
-  const { items: upcoming, selectedId, select } = useUpcomingServices()
 
   return (
     <>
