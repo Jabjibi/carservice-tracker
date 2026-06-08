@@ -59,10 +59,10 @@ export default async function LoginPage() {
               asChild
               className="h-13 w-full gap-2.5 rounded-[12px] bg-[#06C755] text-[15px] font-semibold text-white hover:bg-[#05b04a] active:scale-[0.98]"
             >
-              <Link href="/api/auth/line">
+              <a href="/api/auth/line">
                 <LineIcon className="size-5" />
                 {t('cta')}
-              </Link>
+              </a>
             </Button>
 
             {/* Terms */}

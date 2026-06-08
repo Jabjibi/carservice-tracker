@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 import { CarCard } from '@/components/cars/CarCard'
 import { Fab } from '@/components/shared/Fab'
 import { Button } from '@/components/ui/button'
-import { useCars } from '@/lib/hooks/use-cars'
+import { useCars } from '@/lib/hooks/cars/use-cars'
 
 export function MyCarsClient() {
   const t = useTranslations('cars')
