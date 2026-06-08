@@ -6,6 +6,7 @@ import { Fab } from '@/components/shared/Fab'
 import { SectionCard } from '@/components/shared/SectionCard'
 import { StatCard } from '@/components/shared/StatCard'
 import { useDashboard } from '@/lib/hooks/dashboard/use-dashboard'
+import { useUser } from '@/lib/hooks/use-user'
 import { useExpenseChart } from '@/lib/hooks/dashboard/use-expense-chart'
 import { useRecentServices } from '@/lib/hooks/dashboard/use-recent-services'
 import { baht } from '@/lib/utils'
@@ -17,14 +18,14 @@ import { UpcomingServiceList } from './UpcomingServiceList'
 export function DashboardClient() {
   const t = useTranslations('dashboard')
   const { stats, upcoming, selectedId, select } = useDashboard()
+  const user = useUser()
   const chart = useExpenseChart()
   const recent = useRecentServices()
 
   return (
     <>
       <PageGreeting
-        name="สมชาย"
-        date="วันเสาร์ที่ 31 พฤษภาคม 2567"
+        name={user?.displayName ?? '...'}
         subtitle={t('greetingSubtitle')}
       />
 

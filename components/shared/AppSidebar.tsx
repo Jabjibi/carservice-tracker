@@ -18,6 +18,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar'
 import { UserProfileCard } from '@/components/shared/UserProfileCard'
+import { useUser } from '@/lib/hooks/use-user'
 
 type NavKey = 'dashboard' | 'cars' | 'notifications'
 
@@ -45,6 +46,7 @@ export function AppSidebar() {
   const t = useTranslations('sidebar')
   const pathname = usePathname()
   const { toggleSidebar } = useSidebar()
+  const user = useUser()
 
   return (
     <Sidebar variant="floating" collapsible="icon" className={GLASS_INNER}>
@@ -108,7 +110,10 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="px-2 pb-3 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:px-1">
-        <UserProfileCard name="สมชาย จริงใจ" plan="PREMIUM" />
+        <UserProfileCard
+          name={user?.displayName ?? '...'}
+          avatarUrl={user?.pictureUrl}
+        />
       </SidebarFooter>
     </Sidebar>
   )
