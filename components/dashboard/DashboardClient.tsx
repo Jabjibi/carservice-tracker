@@ -24,10 +24,7 @@ export function DashboardClient() {
 
   return (
     <>
-      <PageGreeting
-        name={user?.displayName ?? '...'}
-        subtitle={t('greetingSubtitle')}
-      />
+      <PageGreeting name={user?.displayName ?? '...'} subtitle={t('greetingSubtitle')} />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard

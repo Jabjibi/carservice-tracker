@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/sidebar'
 import { UserProfileCard } from '@/components/shared/UserProfileCard'
 import { useUser } from '@/lib/hooks/use-user'
+import { logout } from '@/lib/actions/auth'
 
 type NavKey = 'dashboard' | 'cars' | 'notifications'
 
@@ -113,6 +114,7 @@ export function AppSidebar() {
         <UserProfileCard
           name={user?.displayName ?? '...'}
           avatarUrl={user?.pictureUrl}
+          logoutAction={logout}
         />
       </SidebarFooter>
     </Sidebar>
